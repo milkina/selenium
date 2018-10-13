@@ -1,7 +1,9 @@
 package com.examclouds.pageObject.administration;
 
+import com.examclouds.model.Answer;
 import com.examclouds.model.Category;
 import com.examclouds.model.QuestionEntry;
+import com.examclouds.model.TestQuestionEntry;
 import com.examclouds.pageObject.administration.question.EditQuestionPage;
 import com.examclouds.pageObject.administration.question.ShowQuestionEntryPage;
 import com.examclouds.pageObject.administration.question.ShowQuestionPicturePage;
@@ -45,6 +47,7 @@ public class ShowQuestionsPage extends BasePage {
         test.click(LOC_GO_TO_QUESTION_HREF);
         return new ShowQuestionEntryPage(test, category.getName() + " - " + category.getTest().getName());
     }
+
     public ShowQuestionPicturePage showQuestionPicture(Category category) {
         test.click(LOC_SHOW_PICTURE_QUESTION_HREF);
         return new ShowQuestionPicturePage(test, category.getName() + " - " + category.getTest().getName());
@@ -59,6 +62,14 @@ public class ShowQuestionsPage extends BasePage {
     public ShowQuestionsPage validateQuestionEntryPresent(QuestionEntry questionEntry) {
         test.validateTextPresent(questionEntry.getQuestion());
         test.validateTextPresent(questionEntry.getAnswer());
+        return this;
+    }
+
+    public ShowQuestionsPage validateTestQuestionEntryPresent(TestQuestionEntry questionEntry) {
+        test.validateTextPresent(questionEntry.getQuestion());
+        for (Answer answer : questionEntry.getAnswers()) {
+            test.validateTextPresent(answer.getText());
+        }
         return this;
     }
 

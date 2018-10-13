@@ -2,6 +2,7 @@ package com.examclouds.pageObject.category;
 
 import com.examclouds.pageObject.base.BasePage;
 import com.examclouds.pageObject.exam.ShowExamQuestionPage;
+import com.examclouds.pageObject.exam.StartQuestionTestPage;
 import com.examclouds.pageObject.test.TestPage;
 import io.ddavison.conductor.Locomotive;
 import org.openqa.selenium.By;
@@ -11,8 +12,7 @@ import org.openqa.selenium.By;
  */
 public class CategoryPage extends TestPage {
     public static final By LOC_START_QUIZ_BTN = By.xpath("//input[@id='startQuiz']");
-    public static final String LOC_SELECT_OPTIONS_DIV = "div[id$='selectOptionsPanel']";
-    public static final String LOC_EXAM_OPTION = "input[value='%s']";
+
     public static final String CATEGORY_TITLE = "Basic Concepts - Web Services";
     public static final String CATEGORY_NAME = "Basic Concepts";
     public static final String CATEGORY_PATHNAME = "basic-concepts";
@@ -34,24 +34,8 @@ public class CategoryPage extends TestPage {
         return this;
     }
 
-    public ShowExamQuestionPage clickStartQuizButton() {
+    public StartQuestionTestPage clickStartQuizButton() {
         test.click(LOC_START_QUIZ_BTN);
-        return new ShowExamQuestionPage(test, title);
+        return new StartQuestionTestPage(test, title);
     }
-
-    public CategoryPage validateOptionsNotPresent() {
-        test.validateNotPresent(LOC_SELECT_OPTIONS_DIV);
-        return this;
-    }
-
-    public CategoryPage validateOptionsPresent() {
-        test.validatePresent(LOC_SELECT_OPTIONS_DIV);
-        return this;
-    }
-
-    public CategoryPage selectOption(String title) {
-        test.click(String.format(LOC_EXAM_OPTION, title));
-        return this;
-    }
-
 }

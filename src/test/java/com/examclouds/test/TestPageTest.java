@@ -30,7 +30,7 @@ public class TestPageTest extends BaseTest {
         homePage.openTestPage(TestEnum.WS)
                 .openCategoryPage(CATEGORY_NAME, TEST_NAME, CATEGORY_PATHNAME)
                 .validateStartQuizButtonPresent()
-                .validateOptionsNotPresent()
+              //  .validateOptionsNotPresent()
                 .validateCategoryMenuPresent()
                 .validateCommentSectionPresent()
         ;
@@ -43,7 +43,8 @@ public class TestPageTest extends BaseTest {
                 .openTestPage(TestEnum.WS)
                 .openCategoryPage(CATEGORY_NAME, TEST_NAME, CATEGORY_PATHNAME)
                 .validateStartQuizButtonPresent()
-                .validateOptionsPresent()
+              //  .clickStartQuizButton()
+               // .validateOptionsPresent()
                 .validateCategoryMenuPresent()
                 .validateCommentSectionPresent()
         ;

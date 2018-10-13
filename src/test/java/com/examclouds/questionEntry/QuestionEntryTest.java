@@ -1,19 +1,33 @@
 package com.examclouds.questionEntry;
 
 import com.examclouds.base.BaseTest;
+import com.examclouds.model.Answer;
 import com.examclouds.model.Category;
 import com.examclouds.model.QuestionEntry;
+import com.examclouds.model.TestQuestionEntry;
 import com.examclouds.pageObject.home.HomePage;
 import org.junit.Test;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Tatyana on 08.12.2016.
  */
 public class QuestionEntryTest extends BaseTest {
-    QuestionEntry questionEntry1 = new QuestionEntry("questionвопрос111", "answerответ111");
-    QuestionEntry questionEntry2 = new QuestionEntry("questionвопрос222", "answerответ222");
-    QuestionEntry questionEntry3 = new QuestionEntry("questionвопрос333", "answerответ333");
+    private QuestionEntry questionEntry1 = new QuestionEntry("questionвопрос111", "answerответ111");
+    private QuestionEntry questionEntry2 = new QuestionEntry("questionвопрос222", "answerответ222");
+    private QuestionEntry questionEntry3 = new QuestionEntry("questionвопрос333", "answerответ333");
+    private TestQuestionEntry testQuestionEntry1 = initializeTestQuestionEntry();
     private HomePage homePage = new HomePage(this);
+
+    private TestQuestionEntry initializeTestQuestionEntry() {
+        Set<Answer> answers = new HashSet<Answer>();
+        answers.add(new Answer("answerответ411", true));
+        answers.add(new Answer("answerответ422", true));
+        answers.add(new Answer("answerответ433", true));
+        return new TestQuestionEntry("questionвопрос444", answers);
+    }
 
     @Test
     public void testCreateDeleteQuestion() {
@@ -31,6 +45,25 @@ public class QuestionEntryTest extends BaseTest {
                 .openShowTestPage(category1.getTest().getPathName())
                 .openShowQuestionsPage(category1.getPathName(), category1.getTest().getPathName(), category1.getTitle())
                 .validateQuestionEntryPresent(questionEntry1)
+                .deleteQuestion()
+        ;
+    }
+
+    @Test
+    public void testCreateDeleteTestQuestion() {
+        //add Question
+        homePage.openLoginPage()
+                .sysadminLogin()
+                .openAdminTab()
+                .openAddQuestionPage()
+                .selectTest(category1.getTest().getPathName())
+                .selectCategory(category1.getPathName())
+                .addTestQuestion(testQuestionEntry1)
+                //verify question exists and delete it
+                .openAdminTab()
+                .openShowTestPage(category1.getTest().getPathName())
+                .openShowQuestionsPage(category1.getPathName(), category1.getTest().getPathName(), category1.getTitle())
+                .validateTestQuestionEntryPresent(testQuestionEntry1)
                 .deleteQuestion()
         ;
     }

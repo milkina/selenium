@@ -25,7 +25,7 @@ abstract public class BasePage {
     public Locomotive test;
 
     public static final String LOC_LNK_HOMETAB = "li a[id$='home']";
-    public static final String LOC_LNK_MY_PROFILETAB = "li a[href$='/person/MyProfile.jsp']";
+    public static final String LOC_LNK_MY_PROFILETAB = "li a[href$='/show-user-profile']";
     public static final String LOC_LNK_ADMINTAB = "li a[href$='/administration/welcome.jsp']";
     public static final String LOC_LNK_ARTICLESTAB = "li a[href$='/articles.jsp']";
     public static final String LOC_LNK_LOGOUT = "a[id$='isLogin']";
@@ -37,7 +37,8 @@ abstract public class BasePage {
     public static final String LOC_COMMENT_BTN = "input[name='addComment']";
     public static final String LOC_COMMENT_DIV = "div[class$='commentBody']";
     public static final String LOC_EDIT_COMMENT_HREF = "div[class$='commentBody'] div a[id$='Edit%s']";
-    public static final String LOC_DELETE_COMMENT_HREF = "div[class$='commentBody'] div a[id$='Delete%s']";
+    public static final String LOC_DELETE_COMMENT_HREF = "div[class$='commentBody'] input[type$='checkbox'][value$='%s']";
+    public static final String LOC_DELETE_COMMENT_BTN = "input[type$='submit']";
     public static final String LOC_COMMENT_BODY_DIV = "div[class$='commentBody'] div[id$='commentBody%s']";
     public static final String LOC_ARTICLE_HREF = "a[href='%s']";
 
@@ -213,7 +214,8 @@ abstract public class BasePage {
     public BasePage deleteComment(String text) {
         String id = getLastCommentId();
         test.validateText(String.format(LOC_COMMENT_BODY_DIV, id), text);
-        test.click(String.format(LOC_DELETE_COMMENT_HREF, id));
+        test.check(String.format(LOC_DELETE_COMMENT_HREF, id));
+        test.click(LOC_DELETE_COMMENT_BTN);
         return this;
     }
 
@@ -222,7 +224,7 @@ abstract public class BasePage {
     }
 
     public ArticlePage openArticle(String url, String title) {
-        test.click(String.format(LOC_ARTICLE_HREF,url));
+        test.click(String.format(LOC_ARTICLE_HREF, url));
         return new ArticlePage(test, title);
     }
 
@@ -239,7 +241,7 @@ abstract public class BasePage {
         test.driver.switchTo().parentFrame();
     }
 
-    public void sleep(){
+    public void sleep() {
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {

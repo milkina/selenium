@@ -33,6 +33,7 @@ public class ExamTest extends BaseTest {
         ShowExamQuestionPage showExamQuestionPage = homePage
                 .openTestPage(TestEnum.WS)
                 .openCategoryPage(categoryName,testName,categoryPathName)
+                .clickStartQuizButton()
                 .validateOptionsPresent()
                 .selectOption(ExamOptions.ANSWERED.toString())
                 .clickStartQuizButton()
@@ -40,6 +41,7 @@ public class ExamTest extends BaseTest {
                 .isMessagePresent("There are no questions selected. Either you have already answered all the questions or the selected category is empty.")
                 .openTestPage(TestEnum.WS)
                 .openCategoryPage(categoryName,testName,categoryPathName)
+                .clickStartQuizButton()
                 .clickStartQuizButton()
                 .waitForWindow(title);
         Integer number = showExamQuestionPage.getQuestionsNumber();
@@ -55,6 +57,7 @@ public class ExamTest extends BaseTest {
         }
 
         showExamQuestionPage.openCategoryPage(categoryName,testName,categoryPathName)
+                .clickStartQuizButton()
                 .selectOption(ExamOptions.NOT_ANSWERED.toString())
                 .clickStartQuizButton()
                 .loadMessagePage()
@@ -66,6 +69,7 @@ public class ExamTest extends BaseTest {
         ShowExamQuestionPage showExamQuestionPage =  homePage
                 .openTestPage(TestEnum.WS)
                 .openCategoryPage(categoryName,testName,categoryPathName)
+                .clickStartQuizButton()
                 .validateOptionsNotPresent()
                 .clickStartQuizButton()
                 .waitForWindow(title)
