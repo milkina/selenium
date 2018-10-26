@@ -1,7 +1,6 @@
 package com.examclouds.pageObject.exam;
 
 import com.examclouds.pageObject.base.BasePage;
-import com.examclouds.pageObject.category.CategoryPage;
 import io.ddavison.conductor.Locomotive;
 import org.openqa.selenium.By;
 
@@ -35,7 +34,6 @@ public class StartQuestionTestPage extends BasePage {
         test.click(String.format(LOC_EXAM_OPTION, title));
         return this;
     }
-
 
     public StartQuestionTestPage validateOptionsNotPresent() {
         test.validateNotPresent(LOC_SELECT_OPTIONS_DIV);

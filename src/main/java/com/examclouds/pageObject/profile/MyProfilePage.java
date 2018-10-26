@@ -10,6 +10,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by Tatyana on 26.05.2016.
  */
@@ -66,5 +69,11 @@ public class MyProfilePage extends BasePage {
         return this;
     }
 
-
+    public MyProfilePage validatePassedExam(String categoryNme) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
+        test.validateTextPresent(simpleDateFormat.format(new Date()));
+        test.validateTextPresent("100.0%");
+        test.validateTextPresent(categoryNme);
+        return this;
+    }
 }

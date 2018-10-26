@@ -13,7 +13,8 @@ import io.ddavison.conductor.Locomotive;
  * Created by Tatyana on 07.06.2016.
  */
 public class ShowTestPage extends BasePage {
-    public static final String LOC_SHOW_QUESTIONS_HREF = "a[name='CATEGORY_PATH=%s&TEST_PATH=%s']";
+    public static final String LOC_SHOW_QUESTIONS_HREF = "a[name='CATEGORY_PATH=%s&TEST_PATH=%s&TYPE=QUESTION']";
+    public static final String LOC_SHOW_TEST_QUESTIONS_HREF = "a[name='CATEGORY_PATH=%s&TEST_PATH=%s&TYPE=TEST']";
     public static final String LOC_ADD_QUESTION_HREF = "a[name='addQuestion%s']";
     public static final String LOC_CREATE_CATEGORY_HREF = "a[name='createCategory']";
     public static final String LOC_ADD_CATEGORY_HREF = "a[name='addCategory']";
@@ -34,8 +35,14 @@ public class ShowTestPage extends BasePage {
 
     public ShowQuestionsPage openShowQuestionsPage(String categoryPath, String testPath, String title) {
         test.click(String.format(LOC_SHOW_QUESTIONS_HREF, categoryPath, testPath));
+        return new ShowQuestionsPage(test, "Questions "+title);
+    }
+
+    public ShowQuestionsPage openShowTestQuestionsPage(String categoryPath, String testPath, String title) {
+        test.click(String.format(LOC_SHOW_TEST_QUESTIONS_HREF, categoryPath, testPath));
         return new ShowQuestionsPage(test, title);
     }
+
 
     public AddQuestionPage openAddQuestionsPage(String categoryPath) {
         test.click(String.format(LOC_ADD_QUESTION_HREF, categoryPath));
@@ -88,4 +95,5 @@ public class ShowTestPage extends BasePage {
         test.click(String.format(LOC_MOVE_QUESTIONS_HREF, categoryPath));
         return new MoveQuestionsPage(test);
     }
+
 }

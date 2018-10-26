@@ -43,10 +43,18 @@ public class AddQuestionPage extends BasePage {
                 addAnswer();
             }
             setAnswerText(answer.getText(), i);
-            setCheckbox(i++);
+            if (answer.isChecked()) {
+                setCheckbox(i);
+            }
+            i++;
         }
-        return saveData().isMessagePresent(THE_QUESTION_IS_ADDED);
+        return clickOk(THE_QUESTION_IS_ADDED);
     }
+
+    public MessagePage clickOk(String message) {
+        return saveData().isMessagePresent(message);
+    }
+
 
     public AddQuestionPage setQuestionText(String str) {
         setTextArea(str, "QUESTION_TEXT_PARAM");
@@ -94,8 +102,8 @@ public class AddQuestionPage extends BasePage {
         return this;
     }
 
-    public MessagePage addAnswer() {
+    public AddQuestionPage addAnswer() {
         test.click(LOC_ADD_ANSWER_BTN);
-        return new MessagePage(test);
+        return this;
     }
 }

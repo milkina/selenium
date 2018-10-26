@@ -1,15 +1,10 @@
 package com.examclouds.questionEntry;
 
 import com.examclouds.base.BaseTest;
-import com.examclouds.model.Answer;
 import com.examclouds.model.Category;
 import com.examclouds.model.QuestionEntry;
-import com.examclouds.model.TestQuestionEntry;
 import com.examclouds.pageObject.home.HomePage;
 import org.junit.Test;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by Tatyana on 08.12.2016.
@@ -18,20 +13,11 @@ public class QuestionEntryTest extends BaseTest {
     private QuestionEntry questionEntry1 = new QuestionEntry("questionвопрос111", "answerответ111");
     private QuestionEntry questionEntry2 = new QuestionEntry("questionвопрос222", "answerответ222");
     private QuestionEntry questionEntry3 = new QuestionEntry("questionвопрос333", "answerответ333");
-    private TestQuestionEntry testQuestionEntry1 = initializeTestQuestionEntry();
-    private HomePage homePage = new HomePage(this);
 
-    private TestQuestionEntry initializeTestQuestionEntry() {
-        Set<Answer> answers = new HashSet<Answer>();
-        answers.add(new Answer("answerответ411", true));
-        answers.add(new Answer("answerответ422", true));
-        answers.add(new Answer("answerответ433", true));
-        return new TestQuestionEntry("questionвопрос444", answers);
-    }
+    private HomePage homePage = new HomePage(this);
 
     @Test
     public void testCreateDeleteQuestion() {
-
         //add Question
         homePage.openLoginPage()
                 .sysadminLogin()
@@ -45,7 +31,12 @@ public class QuestionEntryTest extends BaseTest {
                 .openShowTestPage(category1.getTest().getPathName())
                 .openShowQuestionsPage(category1.getPathName(), category1.getTest().getPathName(), category1.getTitle())
                 .validateQuestionEntryPresent(questionEntry1)
+                .validateQuestionCount(1)
                 .deleteQuestion()
+                .openAdminTab()
+                .openShowTestPage(category1.getTest().getPathName())
+                .openShowQuestionsPage(category1.getPathName(), category1.getTest().getPathName(), category1.getTitle())
+                .validateQuestionCount(0)
         ;
     }
 
@@ -58,13 +49,14 @@ public class QuestionEntryTest extends BaseTest {
                 .openAddQuestionPage()
                 .selectTest(category1.getTest().getPathName())
                 .selectCategory(category1.getPathName())
-                .addTestQuestion(testQuestionEntry1)
+                .addTestQuestion(testQuestionEntries[0])
                 //verify question exists and delete it
-                .openAdminTab()
-                .openShowTestPage(category1.getTest().getPathName())
-                .openShowQuestionsPage(category1.getPathName(), category1.getTest().getPathName(), category1.getTitle())
-                .validateTestQuestionEntryPresent(testQuestionEntry1)
+                .openShowTestQuestionPage(category1)
+                .validateTestQuestionEntryPresent(testQuestionEntries[0])
+                .validateQuestionCount(1)
                 .deleteQuestion()
+                .openShowTestQuestionPage(category1)
+                .validateQuestionCount(0)
         ;
     }
 
@@ -83,6 +75,7 @@ public class QuestionEntryTest extends BaseTest {
                 .openAdminTab()
                 .openShowTestPage(category1.getTest().getPathName())
                 .openShowQuestionsPage(category1.getPathName(), category1.getTest().getPathName(), category1.getTitle())
+                .validateQuestionCount(1)
                 .openEditQuestionPage()
                 .upQuestionEntry()
                 .selectTest(category2.getTest().getPathName())
@@ -94,17 +87,67 @@ public class QuestionEntryTest extends BaseTest {
                 .openShowTestPage(category1.getTest().getPathName())
                 .openShowQuestionsPage(category1.getPathName(), category1.getTest().getPathName(), category1.getTitle())
                 .validateQuestionEntryNotPresent(questionEntry1)
+                .validateQuestionCount(0)
                 //verify question exists and delete it
                 .openAdminTab()
                 .openShowTestPage(category2.getTest().getPathName())
                 .openShowQuestionsPage(category2.getPathName(), category2.getTest().getPathName(), category2.getTitle())
                 .validateQuestionEntryPresent(questionEntry2)
+                .validateQuestionCount(1)
                 .deleteQuestion()
                 //verify question doesn't exists
                 .openAdminTab()
                 .openShowTestPage(category2.getTest().getPathName())
                 .openShowQuestionsPage(category2.getPathName(), category2.getTest().getPathName(), category2.getTitle())
                 .validateQuestionEntryNotPresent(questionEntry2)
+                .validateQuestionCount(0)
+        ;
+    }
+
+    @Test
+    public void testChangeTypeQuestion() {
+        //add Question
+        homePage.openLoginPage()
+                .sysadminLogin()
+                .openAdminTab()
+                .openAddQuestionPage()
+                .selectTest(category1.getTest().getPathName())
+                .selectCategory(category1.getPathName())
+                .addTestQuestion(testQuestionEntries[0])
+                //edit Question
+                .openShowTestQuestionPage(category1)
+                .validateQuestionCount(1)
+                .openEditQuestionPage()
+                .deleteAnswer(1)
+                .deleteAnswer(2)
+                .clickOk("The question is updated.")
+                //
+                .openShowTestQuestionPage(category1)
+                .validateQuestionCount(0)
+                .validateQuestionEntryNotPresent(questionEntry1)
+                //verify question exists and delete it
+                .openShowQuestionPage(category1)
+                .validateQuestionCount(1)
+                .validateQuestionEntryPresent(testQuestionEntries[0].getQuestion())
+                .openEditQuestionPage()
+                .addAnswer()
+                .setAnswerText(testQuestionEntries[0].getAnswer(), 2)
+                .setCheckbox(2)
+                .clickOk("The question is updated.")
+
+                .openShowQuestionPage(category1)
+                .validateQuestionCount(0)
+                .validateQuestionEntryNotPresent(testQuestionEntries[0])
+
+                .openShowTestQuestionPage(category1)
+                .validateQuestionCount(1)
+                .validateQuestionEntryPresent(testQuestionEntries[0])
+
+                .deleteQuestion()
+                //verify question doesn't exists
+                .openShowTestQuestionPage(category1)
+                .validateQuestionCount(0)
+                .validateQuestionEntryNotPresent(testQuestionEntries[0])
         ;
     }
 
@@ -174,6 +217,7 @@ public class QuestionEntryTest extends BaseTest {
                 .validateQuestionEntryPresent(questionEntry1)
                 .validateQuestionEntryNotPresent(questionEntry2)
                 .validateQuestionEntryNotPresent(questionEntry3)
+                .validateQuestionCount(1)
                 .deleteQuestion()
                 //Verify questions are moved
                 .openAdminTab()
@@ -182,13 +226,13 @@ public class QuestionEntryTest extends BaseTest {
                 .validateQuestionEntryNotPresent(questionEntry1)
                 .validateQuestionEntryPresent(questionEntry2)
                 .validateQuestionEntryPresent(questionEntry3)
+                .validateQuestionCount(2)
                 //Delete questions
                 .deleteQuestion()
                 .openAdminTab()
                 .openShowTestPage(category2.getTest().getPathName())
                 .openShowQuestionsPage(category2.getPathName(), category2.getTest().getPathName(), category2.getTitle())
                 .deleteQuestion()
-
         ;
 
     }

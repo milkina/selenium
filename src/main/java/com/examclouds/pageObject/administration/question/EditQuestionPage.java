@@ -12,6 +12,8 @@ import org.openqa.selenium.By;
  */
 public class EditQuestionPage extends AddQuestionPage {
     public static final String LOC_UP_HREF = "a[name='up']";
+    public static final String LOC_DELETE_BTN = "input[id='deleteAnswer%s']";
+
     @Override
     public String getTitle() {
         return "Edit Question";
@@ -24,7 +26,12 @@ public class EditQuestionPage extends AddQuestionPage {
     public MessagePage editQuestion(QuestionEntry questionEntry) {
         setQuestionText(questionEntry.getQuestion());
         setAnswerText(questionEntry.getAnswer());
-        return saveData().isMessagePresent("The question is updated.");
+        return clickOk("The question is updated.");
+    }
+
+    public EditQuestionPage deleteAnswer(int id) {
+        test.click(String.format(LOC_DELETE_BTN, id));
+        return this;
     }
 
     public EditQuestionPage selectTest(String testPath) {
@@ -37,7 +44,7 @@ public class EditQuestionPage extends AddQuestionPage {
         return this;
     }
 
-    public EditQuestionPage upQuestionEntry(){
+    public EditQuestionPage upQuestionEntry() {
         test.click(LOC_UP_HREF);
         return this;
     }

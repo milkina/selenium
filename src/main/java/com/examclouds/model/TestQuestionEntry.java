@@ -1,29 +1,24 @@
 package com.examclouds.model;
 
-import java.util.Set;
+import java.util.List;
 
-public class TestQuestionEntry {
-    private String question;
-    private Set<Answer> answers;
+public class TestQuestionEntry extends AbstractQuestionEntry {
+    private List<Answer> answers;
 
-    public TestQuestionEntry(String question, Set<Answer> answers) {
-        this.question = question;
+    public TestQuestionEntry(String question, List<Answer> answers) {
+        super(question);
         this.answers = answers;
     }
 
-    public String getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(String question) {
-        this.question = question;
-    }
-
-    public Set<Answer> getAnswers() {
+    public List<Answer> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(Set<Answer> answers) {
+    public void setAnswers(List<Answer> answers) {
         this.answers = answers;
+    }
+
+    public String getAnswer() {
+        return answers.stream().findFirst().get().getText();
     }
 }

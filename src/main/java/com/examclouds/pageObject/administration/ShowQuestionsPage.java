@@ -1,9 +1,6 @@
 package com.examclouds.pageObject.administration;
 
-import com.examclouds.model.Answer;
-import com.examclouds.model.Category;
-import com.examclouds.model.QuestionEntry;
-import com.examclouds.model.TestQuestionEntry;
+import com.examclouds.model.*;
 import com.examclouds.pageObject.administration.question.EditQuestionPage;
 import com.examclouds.pageObject.administration.question.ShowQuestionEntryPage;
 import com.examclouds.pageObject.administration.question.ShowQuestionPicturePage;
@@ -53,15 +50,24 @@ public class ShowQuestionsPage extends BasePage {
         return new ShowQuestionPicturePage(test, category.getName() + " - " + category.getTest().getName());
     }
 
-    public ShowQuestionsPage validateQuestionEntryNotPresent(QuestionEntry questionEntry) {
+    public ShowQuestionsPage validateQuestionEntryNotPresent(AbstractQuestionEntry questionEntry) {
         test.validateTextNotPresent(questionEntry.getQuestion());
         test.validateTextNotPresent(questionEntry.getAnswer());
         return this;
     }
 
-    public ShowQuestionsPage validateQuestionEntryPresent(QuestionEntry questionEntry) {
+    public ShowQuestionsPage validateQuestionCount(int i) {
+        test.validateTextPresent("Total: " + i + " questions.");
+        return this;
+    }
+
+    public ShowQuestionsPage validateQuestionEntryPresent(AbstractQuestionEntry questionEntry) {
         test.validateTextPresent(questionEntry.getQuestion());
         test.validateTextPresent(questionEntry.getAnswer());
+        return this;
+    }
+    public ShowQuestionsPage validateQuestionEntryPresent(String question) {
+        test.validateTextPresent(question);
         return this;
     }
 

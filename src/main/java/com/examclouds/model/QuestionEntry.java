@@ -3,21 +3,12 @@ package com.examclouds.model;
 /**
  * Created by Tatyana on 08.12.2016.
  */
-public class QuestionEntry {
-    private String question;
+public class QuestionEntry extends AbstractQuestionEntry {
     private String answer;
 
     public QuestionEntry(String question, String answer) {
-        this.question = question;
+        super(question);
         this.answer = answer;
-    }
-
-    public String getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(String question) {
-        this.question = question;
     }
 
     public String getAnswer() {

@@ -1,6 +1,8 @@
 package com.examclouds.pageObject.base;
 
+import com.examclouds.model.Category;
 import com.examclouds.model.TestEnum;
+import com.examclouds.pageObject.administration.ShowQuestionsPage;
 import com.examclouds.pageObject.administration.WelcomeAdminPage;
 import com.examclouds.pageObject.article.ArticleListPage;
 import com.examclouds.pageObject.article.ArticlePage;
@@ -247,5 +249,17 @@ abstract public class BasePage {
         } catch (InterruptedException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public ShowQuestionsPage openShowTestQuestionPage(Category category) {
+        return openAdminTab()
+                .openShowTestPage(category.getTest().getPathName())
+                .openShowTestQuestionsPage(category.getPathName(), category.getTest().getPathName(), "Questions " + category.getTitle());
+    }
+
+    public ShowQuestionsPage openShowQuestionPage(Category category) {
+        return openAdminTab()
+                .openShowTestPage(category.getTest().getPathName())
+                .openShowQuestionsPage(category.getPathName(), category.getTest().getPathName(), category.getTitle());
     }
 }
