@@ -61,11 +61,17 @@ public class ShowQuestionsPage extends BasePage {
         return this;
     }
 
+    public ShowQuestionsPage validateQuestionNotApproved() {
+        test.validateTextPresent("Not Approved");
+        return this;
+    }
+
     public ShowQuestionsPage validateQuestionEntryPresent(AbstractQuestionEntry questionEntry) {
         test.validateTextPresent(questionEntry.getQuestion());
         test.validateTextPresent(questionEntry.getAnswer());
         return this;
     }
+
     public ShowQuestionsPage validateQuestionEntryPresent(String question) {
         test.validateTextPresent(question);
         return this;

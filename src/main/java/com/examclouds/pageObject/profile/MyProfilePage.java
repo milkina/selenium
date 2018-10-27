@@ -1,14 +1,12 @@
 package com.examclouds.pageObject.profile;
 
 import com.examclouds.model.Person;
+import com.examclouds.pageObject.administration.ShowQuestionsPage;
+import com.examclouds.pageObject.administration.question.AddQuestionPage;
 import com.examclouds.pageObject.base.BasePage;
 import io.ddavison.conductor.Locomotive;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,6 +24,8 @@ public class MyProfilePage extends BasePage {
     public static final String LOC_INPUT_EMAIL = "input[name$='email']";
     public static final By LOC_SAVE_BTN = By.xpath("//input[@name='Save']");
     public static final String LOC_CHANGE_PSWD_BTN = "input[name$='ChangePassword']";
+    public static final String LOC_ADD_QUESTION_HRF = "a[name='addQuestion']";
+    public static final String LOC_SEE_MY_QUESTIONS_HREF = "a[name='myQuestions']";
 
     public MyProfilePage(Locomotive baseTest) {
         super(baseTest);
@@ -57,9 +57,20 @@ public class MyProfilePage extends BasePage {
         return this;
     }
 
+    public AddQuestionPage clickAddAnswer() {
+        test.click(LOC_ADD_QUESTION_HRF);
+        return new AddQuestionPage(test);
+    }
+
     public ChangePasswordPage openChangePasswordWindow() {
         test.click(LOC_CHANGE_PSWD_BTN);
         return new ChangePasswordPage(test);
+    }
+
+
+    public ShowQuestionsPage clickMyQuestions() {
+        test.click(LOC_SEE_MY_QUESTIONS_HREF);
+        return new ShowQuestionsPage(test, "Questions -");
     }
 
     public MyProfilePage acceptSubmitData() {

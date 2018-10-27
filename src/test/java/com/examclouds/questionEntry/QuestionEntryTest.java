@@ -6,6 +6,9 @@ import com.examclouds.model.QuestionEntry;
 import com.examclouds.pageObject.home.HomePage;
 import org.junit.Test;
 
+import static com.examclouds.pageObject.base.BasePage.USER_LOGIN;
+import static com.examclouds.pageObject.base.BasePage.USER_PASSWORD;
+
 /**
  * Created by Tatyana on 08.12.2016.
  */

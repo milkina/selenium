@@ -58,4 +58,38 @@ public class ProfileTest extends BaseTest {
                 .clickConfirm()
         ;
     }
+
+    @Test
+    public void testAddQuestion() {
+        try {
+            homePage.openLoginPage()
+                    .login(USER_LOGIN, USER_PASSWORD)
+                    .openMyProfile()
+                    .clickAddAnswer()
+                    .selectTest(category1.getTest().getPathName())
+                    .selectCategory(category1.getPathName())
+                    .addQuestion(questionEntry1)
+                    .openMyProfile()
+                    .clickMyQuestions()
+                    .validateQuestionEntryPresent(questionEntry1)
+                    .validateQuestionNotApproved()
+                    .showQuestionPicture(category1)
+                    .openMyProfile()
+                    .clickMyQuestions()
+                    .goToQuestion(category1)
+                    .openMyProfile()
+                    .clickMyQuestions()
+                    .openEditQuestionPage()
+                    .editQuestion(questionEntry1)
+                    .isMessagePresent("The question is updated.");
+        } finally {
+            homePage.openMyProfile()
+                    .clickMyQuestions()
+                    .deleteQuestion()
+                    .openMyProfile()
+                    .clickMyQuestions()
+                    .validateQuestionEntryNotPresent(questionEntry1);
+        }
+
+    }
 }

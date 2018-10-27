@@ -6,7 +6,7 @@ package com.examclouds.model;
 public class QuestionEntry extends AbstractQuestionEntry {
     private String answer;
 
-    public QuestionEntry(String question, String answer) {
+    public QuestionEntry(String question,  String answer) {
         super(question);
         this.answer = answer;
     }

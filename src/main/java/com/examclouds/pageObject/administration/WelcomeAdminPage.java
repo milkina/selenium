@@ -24,6 +24,7 @@ public class WelcomeAdminPage extends BasePage {
     public static final String LOC_ADD_ARTICLE_HREF = "a[name='addArticle']";
     public static final String LOC_ADD_QUESTION_HREF = "a[name='addQuestion']";
     public static final String LOC_ADD_TEST_HREF = "a[name='addTest']";
+    public static final String LOC_VIEW_NOT_APPROVED_QUESTIONS_HREF = "a[name='viewNotApprovedQuestions']";
 
     public WelcomeAdminPage(Locomotive baseTest) {
         super(baseTest);
@@ -113,5 +114,10 @@ public class WelcomeAdminPage extends BasePage {
     public WelcomeAdminPage verifyTestNotExist(String testName) {
         test.validateTextNotPresent(testName);
         return this;
+    }
+
+    public ShowQuestionsPage viewNotApprovedQuestions() {
+        test.click(LOC_VIEW_NOT_APPROVED_QUESTIONS_HREF);
+        return new ShowQuestionsPage(test, "Questions -");
     }
 }

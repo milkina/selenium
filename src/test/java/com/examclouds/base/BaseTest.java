@@ -30,6 +30,7 @@ public class BaseTest extends Locomotive {
     protected Category category3 = new Category("Category3", "category3", testJPA);
     protected QuestionEntry questionEntry1 = new QuestionEntry("question2", "answer2");
     protected static TestQuestionEntry[] testQuestionEntries = new TestQuestionEntry[3];
+    protected static TestQuestionEntry testQuestionEntry;
 
     static {
         testQuestionEntries[0] = initializeTestQuestionEntry("questionвопрос444",
@@ -40,6 +41,9 @@ public class BaseTest extends Locomotive {
                 new boolean[]{true, true, true});
         testQuestionEntries[2] = initializeTestQuestionEntry("questionвопрос6",
                 new String[]{"answerответ611", "answerответ622", "answerответ633"},
+                new boolean[]{true, true, true});
+        testQuestionEntry = initializeTestQuestionEntry("questionвопрос7",
+                new String[]{"answerответ711", "answerответ722", "answerответ733"},
                 new boolean[]{true, true, true});
     }
 

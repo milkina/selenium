@@ -28,6 +28,15 @@ public class ExamTest extends BaseTest {
         String categoryPath = "basic-concepts";
         String testPath = "web-services";
         homePage.openLoginPage()
+                .userLogin()
+                .openMyProfile()
+                .clickAddAnswer()
+                .selectTest(testPath)
+                .selectCategory(categoryPath)
+                .addQuestion(questionEntry1)
+                .logout();
+
+        homePage.openLoginPage()
                 .sysadminLogin()
                 .openAdminTab()
                 .openShowTestPage(testPath)
@@ -68,6 +77,10 @@ public class ExamTest extends BaseTest {
                 .clickStartQuizButton()
                 .loadMessagePage()
                 .isMessagePresent("There are no questions selected. Either you have already answered all the questions or the selected category is empty.");
+
+        homePage.openAdminTab()
+                .viewNotApprovedQuestions()
+                .deleteQuestion();
     }
 
     @Test
@@ -98,6 +111,15 @@ public class ExamTest extends BaseTest {
         String testPath = "web-services";
         try {
             homePage.openLoginPage()
+                    .userLogin()
+                    .openMyProfile()
+                    .clickAddAnswer()
+                    .selectTest(testPath)
+                    .selectCategory(categoryPath)
+                    .addTestQuestion(testQuestionEntry)
+                    .logout();
+
+            homePage.openLoginPage()
                     .sysadminLogin();
             for (TestQuestionEntry testQuestionEntry : testQuestionEntries) {
                 addTestQuestion(testPath, categoryPath, testQuestionEntry);
@@ -113,12 +135,15 @@ public class ExamTest extends BaseTest {
                     .openMyProfile()
                     .validatePassedExam(categoryName);
         } finally {
-            for (TestQuestionEntry testQuestionEntry : testQuestionEntries) {
+            for (int i = 0; i < testQuestionEntries.length; i++) {
                 homePage.openAdminTab()
                         .openShowTestPage(testPath)
                         .openShowTestQuestionsPage(categoryPath, testPath, "Questions Basic Concepts - OCEJWSD 6")
                         .deleteQuestion();
             }
+            homePage.openAdminTab()
+                    .viewNotApprovedQuestions()
+                    .deleteQuestion();
         }
     }
 
