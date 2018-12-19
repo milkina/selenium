@@ -70,7 +70,7 @@ public class BaseTest extends Locomotive {
                 .menuExist()
                 .profileTabPresent()
                 .adminTabNotPresent()
-                .logoutPresent();
+                .logoutPresent().logout();
     }
 
     public void testMenuWithoutLogin(BasePage test) {
@@ -102,5 +102,26 @@ public class BaseTest extends Locomotive {
                 .wrongMessagePresent();
     }
 
+    public void addCategory(String testPath, Category category, BasePage test) {
+        test.openLoginPage()
+                .sysadminLogin()
+                .openAdminTab()
+                .openShowTestPage(testPath)
+                .openCreateCategoryPage()
+                .setCategoryData(category)
+                .clickSave()
+                .loadMessagePage()
+                .isMessagePresent("The category is created.");
+    }
 
+    public void deleteCategory(String testPath, String categoryPath, BasePage adminPage) {
+        adminPage.openAdminTab()
+                .openShowTestPage(testPath)
+                .clickDeleteCategory(categoryPath)
+                .loadMessagePage()
+                .isMessagePresent("The category is removed.")
+                .openTestPage(TestEnum.WS)
+                .validateCategoryItemNotPresent(categoryPath);
+
+    }
 }

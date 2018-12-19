@@ -57,7 +57,7 @@ public class MyProfilePage extends BasePage {
         return this;
     }
 
-    public AddQuestionPage clickAddAnswer() {
+    public AddQuestionPage addQuestion() {
         test.click(LOC_ADD_QUESTION_HRF);
         return new AddQuestionPage(test);
     }
@@ -80,11 +80,11 @@ public class MyProfilePage extends BasePage {
         return this;
     }
 
-    public MyProfilePage validatePassedExam(String categoryNme) {
+    public MyProfilePage validatePassedExam(String categoryName) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
         test.validateTextPresent(simpleDateFormat.format(new Date()));
         test.validateTextPresent("100.0%");
-        test.validateTextPresent(categoryNme);
+        test.validateTextPresent(categoryName);
         return this;
     }
 }

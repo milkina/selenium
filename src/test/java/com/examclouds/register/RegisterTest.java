@@ -25,12 +25,18 @@ public class RegisterTest extends BaseTest {
 
     @Test
     public void existLoginRegister() {
-        Person person = new Person(USER_LOGIN, USER_PASSWORD, EMAIL);
-        homePage.openRegisterPage()
-                .setPerson(person)
-                .setConfPassword(USER_PASSWORD)
-                .submitData()
-                .verifyWrongMessage(LOGIN_EXIST_MSG);
+        try {
+            Person person = new Person(USER_LOGIN, USER_PASSWORD, EMAIL);
+            homePage.openRegisterPage().register(person, USER_PASSWORD)
+                    .logout();
+            homePage.openRegisterPage()
+                    .setPerson(person)
+                    .setConfPassword(USER_PASSWORD)
+                    .submitData()
+                    .verifyWrongMessage(LOGIN_EXIST_MSG);
+        } finally {
+            homePage.openLoginPage().sysadminLogin().openAdminTab().deleteUser(USER_LOGIN);
+        }
     }
 
     @Test

@@ -1,17 +1,16 @@
 package com.examclouds.exam;
 
 import com.examclouds.base.BaseTest;
-import com.examclouds.model.Answer;
 import com.examclouds.model.ExamOptions;
+import com.examclouds.model.Person;
 import com.examclouds.model.TestEnum;
 import com.examclouds.model.TestQuestionEntry;
-import com.examclouds.pageObject.administration.ShowQuestionsPage;
 import com.examclouds.pageObject.exam.ShowExamQuestionPage;
 import com.examclouds.pageObject.exam.ShowTestExamQuestionPage;
 import com.examclouds.pageObject.home.HomePage;
 import org.junit.Test;
 
-import static com.examclouds.pageObject.base.BasePage.SYSADMIN_LOGIN;
+import static com.examclouds.pageObject.register.RegisterPage.*;
 
 /**
  * Created by Tatyana on 29.05.2016.
@@ -27,60 +26,65 @@ public class ExamTest extends BaseTest {
     public void testStartExamWithLogin() {
         String categoryPath = "basic-concepts";
         String testPath = "web-services";
-        homePage.openLoginPage()
-                .userLogin()
-                .openMyProfile()
-                .clickAddAnswer()
-                .selectTest(testPath)
-                .selectCategory(categoryPath)
-                .addQuestion(questionEntry1)
-                .logout();
+        Person person = new Person(USER_LOGIN, USER_PASSWORD, USER_FIRST_NAME, USER_LAST_NAME, USER_EMAIL);
+        homePage.openRegisterPage()
+                .register(person, USER_PASSWORD)
+                .loadWelcomeRegisterPage();
+        try {
+            homePage.openMyProfile()
+                    .addQuestion()
+                    .selectTest(testPath)
+                    .selectCategory(categoryPath)
+                    .addQuestion(questionEntry1)
+                    .logout();
 
-        homePage.openLoginPage()
-                .sysadminLogin()
-                .openAdminTab()
-                .openShowTestPage(testPath)
-                .openShowQuestionsPage(categoryPath, testPath, title)
-                .clickClearHistory()
-        ;
+            homePage.openLoginPage()
+                    .sysadminLogin()
+                    .openAdminTab()
+                    .openShowTestPage(testPath)
+                    .openShowQuestionsPage(categoryPath, testPath, title)
+                    .clickClearHistory();
 
-        ShowExamQuestionPage showExamQuestionPage = homePage
-                .openTestPage(TestEnum.WS)
-                .openCategoryPage(categoryName, testName, categoryPathName)
-                .clickStartQuizButton()
-                .validateOptionsPresent()
-                .selectOption(ExamOptions.ANSWERED.toString())
-                .clickStartQuizButton()
-                .loadMessagePage()
-                .isMessagePresent("There are no questions selected. Either you have already answered all the questions or the selected category is empty.")
-                .openTestPage(TestEnum.WS)
-                .openCategoryPage(categoryName, testName, categoryPathName)
-                .clickStartQuizButton()
-                .clickStartQuizButton()
-                .waitForWindow(title);
-        Integer number = showExamQuestionPage.getQuestionsNumber();
-        for (int i = 1; i < number; i++) {
-            showExamQuestionPage.validatePage(i, number)
-                    .clickCheckbox()
-                    .clickNextButton();
+            ShowExamQuestionPage showExamQuestionPage = homePage
+                    .openTestPage(TestEnum.WS)
+                    .openCategoryPage(categoryName, testName, categoryPathName)
+                    .clickStartQuizButton()
+                    .validateOptionsPresent()
+                    .selectOption(ExamOptions.ANSWERED.toString())
+                    .clickStartQuizButton()
+                    .loadMessagePage()
+                    .isMessagePresent("There are no questions selected. Either you have already answered all the questions or the selected category is empty.")
+                    .openTestPage(TestEnum.WS)
+                    .openCategoryPage(categoryName, testName, categoryPathName)
+                    .clickStartQuizButton()
+                    .clickStartQuizButton()
+                    .waitForWindow(title);
+            Integer number = showExamQuestionPage.getQuestionsNumber();
+            for (int i = 1; i < number; i++) {
+                showExamQuestionPage.validatePage(i, number)
+                        .clickCheckbox()
+                        .clickNextButton();
+            }
+            showExamQuestionPage.clickCheckbox();
+            for (int i = number; i > 1; i--) {
+                showExamQuestionPage.validatePage(i, number)
+                        .validateCheckBoxChecked()
+                        .clickPreviousButton();
+            }
+
+            showExamQuestionPage.openCategoryPage(categoryName, testName, categoryPathName)
+                    .clickStartQuizButton()
+                    .selectOption(ExamOptions.NOT_ANSWERED.toString())
+                    .clickStartQuizButton()
+                    .loadMessagePage()
+                    .isMessagePresent("There are no questions selected. Either you have already answered all the questions or the selected category is empty.");
+
+            homePage.openAdminTab()
+                    .viewNotApprovedQuestions()
+                    .deleteQuestion();
+        } finally {
+            homePage.openAdminTab().deleteUser(USER_LOGIN);
         }
-        showExamQuestionPage.clickCheckbox();
-        for (int i = number; i > 1; i--) {
-            showExamQuestionPage.validatePage(i, number)
-                    .validateCheckBoxChecked()
-                    .clickPreviousButton();
-        }
-
-        showExamQuestionPage.openCategoryPage(categoryName, testName, categoryPathName)
-                .clickStartQuizButton()
-                .selectOption(ExamOptions.NOT_ANSWERED.toString())
-                .clickStartQuizButton()
-                .loadMessagePage()
-                .isMessagePresent("There are no questions selected. Either you have already answered all the questions or the selected category is empty.");
-
-        homePage.openAdminTab()
-                .viewNotApprovedQuestions()
-                .deleteQuestion();
     }
 
     @Test
@@ -109,41 +113,67 @@ public class ExamTest extends BaseTest {
     public void testStartTestExamWithLogin() {
         String categoryPath = "basic-concepts";
         String testPath = "web-services";
-        try {
-            homePage.openLoginPage()
-                    .userLogin()
-                    .openMyProfile()
-                    .clickAddAnswer()
-                    .selectTest(testPath)
-                    .selectCategory(categoryPath)
-                    .addTestQuestion(testQuestionEntry)
-                    .logout();
 
-            homePage.openLoginPage()
-                    .sysadminLogin();
-            for (TestQuestionEntry testQuestionEntry : testQuestionEntries) {
-                addTestQuestion(testPath, categoryPath, testQuestionEntry);
-            }
+        try {
+            Person person = new Person(USER_LOGIN, USER_PASSWORD, USER_FIRST_NAME, USER_LAST_NAME, USER_EMAIL);
+            homePage.openRegisterPage()
+                    .register(person, USER_PASSWORD)
+                    .loadWelcomeRegisterPage().logout();
+            addTestQuestions(categoryPath, testPath);
 
             ShowTestExamQuestionPage showTestExamQuestionPage = homePage
+                    .logout()
+                    .openLoginPage()
+                    .login(USER_LOGIN, USER_PASSWORD)
                     .openTestPage(TestEnum.WS)
                     .openCategoryPage(categoryName, testName, categoryPathName)
                     .clickStartTestButton();
             goThroughQuestions(showTestExamQuestionPage);
-            showTestExamQuestionPage.clickFinishBtn(SYSADMIN_LOGIN)
+            showTestExamQuestionPage.clickFinishBtn(USER_LOGIN)
                     .validatePage()
                     .openMyProfile()
-                    .validatePassedExam(categoryName);
+                    .validatePassedExam(categoryName)
+                    .logout();
+            homePage.openLoginPage()
+                    .sysadminLogin()
+                    .openAdminTab()
+                    .seeUserHistory(USER_LOGIN)
+                    .validateExamResultPresent(categoryName);
         } finally {
-            for (int i = 0; i < testQuestionEntries.length; i++) {
-                homePage.openAdminTab()
-                        .openShowTestPage(testPath)
-                        .openShowTestQuestionsPage(categoryPath, testPath, "Questions Basic Concepts - OCEJWSD 6")
-                        .deleteQuestion();
-            }
+            deleteQuestions(categoryPath, testPath);
+            homePage.openAdminTab().deleteUser(USER_LOGIN);
+        }
+    }
+
+    private void deleteQuestions(String categoryPath, String testPath) {
+        for (int i = 0; i < testQuestionEntries.length; i++) {
             homePage.openAdminTab()
-                    .viewNotApprovedQuestions()
+                    .openShowTestPage(testPath)
+                    .openShowTestQuestionsPage(categoryPath, testPath, "Questions Basic Concepts - OCEJWSD 6")
                     .deleteQuestion();
+        }
+    }
+
+    private void deleteNotApprovedQuestions() {
+        homePage.openAdminTab()
+                .viewNotApprovedQuestions()
+                .deleteQuestion();
+    }
+
+    private void addTestQuestions(String categoryPath, String testPath) {
+        homePage.openLoginPage()
+                .userLogin()
+                .openMyProfile()
+                .addQuestion()
+                .selectTest(testPath)
+                .selectCategory(categoryPath)
+                .addTestQuestion(testQuestionEntry)
+                .logout();
+
+        homePage.openLoginPage()
+                .sysadminLogin();
+        for (TestQuestionEntry testQuestionEntry : testQuestionEntries) {
+            addTestQuestion(testPath, categoryPath, testQuestionEntry);
         }
     }
 

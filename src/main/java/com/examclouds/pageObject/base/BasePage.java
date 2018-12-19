@@ -11,6 +11,7 @@ import com.examclouds.pageObject.home.LoginPage;
 import com.examclouds.pageObject.profile.MyProfilePage;
 import com.examclouds.pageObject.register.RegisterPage;
 import com.examclouds.pageObject.test.TestPage;
+import com.examclouds.pageObject.test.TestsPage;
 import io.ddavison.conductor.Locomotive;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -29,6 +30,7 @@ abstract public class BasePage {
     public static final String LOC_LNK_HOMETAB = "li a[id$='home']";
     public static final String LOC_LNK_MY_PROFILETAB = "li a[href$='/show-user-profile']";
     public static final String LOC_LNK_ADMINTAB = "li a[href$='/administration/welcome.jsp']";
+    public static final String LOC_LNK_TESTS = "li a[href$='/tests']";
     public static final String LOC_LNK_ARTICLESTAB = "li a[href$='/articles.jsp']";
     public static final String LOC_LNK_LOGOUT = "a[id$='isLogin']";
 
@@ -109,6 +111,11 @@ abstract public class BasePage {
     public WelcomeAdminPage openAdminTab() {
         test.click(LOC_LNK_ADMINTAB);
         return new WelcomeAdminPage(test);
+    }
+
+    public TestsPage openTestsPage() {
+        test.click(LOC_LNK_TESTS);
+        return new TestsPage(test);
     }
 
     public MessagePage loadMessagePage() {

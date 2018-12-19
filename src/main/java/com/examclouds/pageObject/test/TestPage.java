@@ -24,7 +24,7 @@ public class TestPage extends BasePage {
     }
 
     public CategoryPage openCategoryPage(String categoryName, String testName, String categoryPathName) {
-        title = categoryName + " - " + testName;
+        title = testName;
         test.click(String.format(LOC_CATEGORY_MENU_ITEM, categoryPathName));
         return new CategoryPage(test, title);
     }

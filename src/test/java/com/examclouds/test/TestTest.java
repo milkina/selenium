@@ -2,8 +2,13 @@ package com.examclouds.test;
 
 import com.examclouds.base.BaseTest;
 import com.examclouds.model.Article;
+import com.examclouds.pageObject.administration.ShowTestPage;
 import com.examclouds.pageObject.administration.WelcomeAdminPage;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import static org.testng.Assert.assertEquals;
 
 /**
  * Created by Tatyana on 19.01.2017.
@@ -12,13 +17,13 @@ public class TestTest extends BaseTest {
     WelcomeAdminPage adminPage = new WelcomeAdminPage(this);
 
     @Test
-    public void createUpDeleteTest() {
+    public void createMoveDeleteTest() {
         adminPage.openLoginPage()
                 .sysadminLogin();
         addTest(test1);
         addTest(test2);
 
-        upTest(test2);
+        moveTest(test1.getPathName(), test2.getPathName());
         adminPage.verifyTestExist(test1)
                 .verifyTestExist(test2);
 
@@ -62,9 +67,12 @@ public class TestTest extends BaseTest {
         ;
     }
 
-    private void upTest(com.examclouds.model.Test test) {
+    private void moveTest(String testPath, String nextTestPath) {
         adminPage.openAdminTab()
-                .clickUpTest(test.getPathName());
+                .dragTest(testPath, nextTestPath)
+                .validateTestOrder(nextTestPath, testPath)
+                .dragTest(testPath, nextTestPath)
+                .validateTestOrder(testPath, nextTestPath);
     }
 
     private void editTest(com.examclouds.model.Test test, com.examclouds.model.Test testEdited) {

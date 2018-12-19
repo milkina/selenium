@@ -15,57 +15,70 @@ public class ProfileTest extends BaseTest {
 
     @Test
     public void testChangeProfileData() {
-        Person person1 = new Person(USER_LOGIN + 1, USER_PASSWORD + 1, USER_FIRST_NAME + 1, USER_LAST_NAME + 1, 1 + USER_EMAIL);
-        Person person2 = new Person(USER_LOGIN, USER_PASSWORD, USER_FIRST_NAME, USER_LAST_NAME, USER_EMAIL);
-        homePage.openLoginPage()
-                .login(USER_LOGIN, USER_PASSWORD)
-                .openMyProfile()
-                .setPersonData(person1)
-                .submitPersonData()
-                .acceptSubmitData()
-                .verifyPersonData(person1)
-                .setPersonData(person2)
-                .submitPersonData()
-                .acceptSubmitData()
-                .verifyPersonData(person2);
+        try {
+            Person person1 = new Person(USER_LOGIN + 1, USER_PASSWORD + 1, USER_FIRST_NAME + 1, USER_LAST_NAME + 1, 1 + USER_EMAIL);
+            Person person2 = new Person(USER_LOGIN, USER_PASSWORD, USER_FIRST_NAME, USER_LAST_NAME, USER_EMAIL);
+            homePage.openRegisterPage()
+                    .register(person2, USER_PASSWORD)
+                    .openMyProfile()
+                    .setPersonData(person1)
+                    .submitPersonData()
+                    .acceptSubmitData()
+                    .verifyPersonData(person1)
+                    .setPersonData(person2)
+                    .submitPersonData()
+                    .acceptSubmitData()
+                    .verifyPersonData(person2)
+                    .logout();
+        } finally {
+            homePage.openLoginPage().sysadminLogin().openAdminTab().deleteUser(USER_LOGIN);
+        }
     }
 
     @Test
     public void testChangePassword() {
-        homePage.openLoginPage()
-                .login(USER_LOGIN, USER_PASSWORD)
-                .openMyProfile()
-                .openChangePasswordWindow()
-                .verifyLoginText(USER_LOGIN)
-                .clickConfirm()
-                .verifyAlertText("Please enter all required fields.")
-                .setPassword(USER_PASSWORD)
-                .setConfPassword(USER_PASSWORD + 1)
-                .clickConfirm()
-                .verifyAlertText("Password should be the same as Confirm Password.")
-                .setPassword(USER_PASSWORD + 1)
-                .setConfPassword(USER_PASSWORD + 1)
-                .clickConfirm()
-                .goToMyProfile()
-                .logout()
-                .openLoginPage()
-                .login(USER_LOGIN, USER_PASSWORD + 1)
-                .verifyUserLoggedIn(USER_LOGIN)
-                .openMyProfile()
-                .openChangePasswordWindow()
-                .setPassword(USER_PASSWORD)
-                .setConfPassword(USER_PASSWORD)
-                .clickConfirm()
-        ;
+        try {
+            Person person = new Person(USER_LOGIN, USER_PASSWORD, USER_FIRST_NAME, USER_LAST_NAME, USER_EMAIL);
+            homePage.openRegisterPage()
+                    .register(person, USER_PASSWORD)
+                    .loadWelcomeRegisterPage()
+                    .openMyProfile()
+                    .openChangePasswordWindow()
+                    .verifyLoginText(USER_LOGIN)
+                    .clickConfirm()
+                    .verifyAlertText("Please enter all required fields.")
+                    .setPassword(USER_PASSWORD)
+                    .setConfPassword(USER_PASSWORD + 1)
+                    .clickConfirm()
+                    .verifyAlertText("Password should be the same as Confirm Password.")
+                    .setPassword(USER_PASSWORD + 1)
+                    .setConfPassword(USER_PASSWORD + 1)
+                    .clickConfirm()
+                    .goToMyProfile()
+                    .logout()
+                    .openLoginPage()
+                    .login(USER_LOGIN, USER_PASSWORD + 1)
+                    .verifyUserLoggedIn(USER_LOGIN)
+                    .openMyProfile()
+                    .openChangePasswordWindow()
+                    .setPassword(USER_PASSWORD)
+                    .setConfPassword(USER_PASSWORD)
+                    .clickConfirm().logout();
+        } finally {
+            homePage.openLoginPage().sysadminLogin().openAdminTab().deleteUser(USER_LOGIN);
+        }
     }
 
     @Test
     public void testAddQuestion() {
         try {
-            homePage.openLoginPage()
-                    .login(USER_LOGIN, USER_PASSWORD)
+            Person person = new Person(USER_LOGIN, USER_PASSWORD, USER_FIRST_NAME, USER_LAST_NAME, USER_EMAIL);
+            addCategory(category1.getTest().getPathName(), category1, homePage);
+            homePage.logout();
+            homePage.openRegisterPage()
+                    .register(person, USER_PASSWORD)
                     .openMyProfile()
-                    .clickAddAnswer()
+                    .addQuestion()
                     .selectTest(category1.getTest().getPathName())
                     .selectCategory(category1.getPathName())
                     .addQuestion(questionEntry1)
@@ -88,7 +101,9 @@ public class ProfileTest extends BaseTest {
                     .deleteQuestion()
                     .openMyProfile()
                     .clickMyQuestions()
-                    .validateQuestionEntryNotPresent(questionEntry1);
+                    .validateQuestionEntryNotPresent(questionEntry1).logout();
+            homePage.openLoginPage().sysadminLogin().openAdminTab().deleteUser(USER_LOGIN);
+            deleteCategory(category1.getTest().getPathName(), category1.getPathName(), homePage);
         }
 
     }

@@ -23,33 +23,22 @@ public class CategoryTest extends BaseTest {
         Category category = new Category(CATEGORY_NAME, CATEGORY_PATHNAME, CATEGORY_DESCRIPTION, CATEGORY_KEYWORDS);
         category.setImage(CATEGORY_IMAGE);
 
-        addCategory(testOCEJWSD.getPathName(), category);
+        addCategory(testOCEJWSD.getPathName(), category, adminPage);
         editCategory(testOCEJWSD.getPathName(), category);
         addRemoveCategoryToTest();
-        deleteCategory(testOCEJWSD.getPathName(), "The category is removed.");
+        deleteCategory(testOCEJWSD.getPathName(), CATEGORY_PATHNAME + 1, adminPage);
     }
 
     @Test
-    public void upCategory() {
+    public void moveCategory() {
         adminPage.openLoginPage()
                 .sysadminLogin()
                 .openAdminTab()
                 .openShowTestPage(testOCEJWSD.getPathName())
-                .clickUpCategory(category1.getPathName())
-                .validateCategoryPresent(category1.getPathName());
-    }
-
-
-    private void addCategory(String testPath, Category category) {
-        adminPage.openLoginPage()
-                .sysadminLogin()
-                .openAdminTab()
-                .openShowTestPage(testPath)
-                .openCreateCategoryPage()
-                .setCategoryData(category)
-                .clickSave()
-                .loadMessagePage()
-                .isMessagePresent("The category is created.");
+                .dragCategory("dom-parser", "jaxp-parent")
+                .validateCategoriesOrder("jaxp-parent","dom-parser")
+                .dragCategory("dom-parser", "xml")
+                .validateCategoriesOrder("xml", "dom-parser");
     }
 
     private void editCategory(String testPath, Category category) {
@@ -95,19 +84,6 @@ public class CategoryTest extends BaseTest {
                 .validateCategoryNotPresent(CATEGORY_PATHNAME + 1)
                 .openAdminTab()
                 .openShowTestPage(testOCEJWSD.getPathName())
-                .validateCategoryPresent(CATEGORY_PATHNAME + 1)
-        ;
-
-    }
-
-    private void deleteCategory(String testPath, String message) {
-        adminPage.openAdminTab()
-                .openShowTestPage(testPath)
-                .clickDeleteCategory(CATEGORY_PATHNAME + 1)
-                .loadMessagePage()
-                .isMessagePresent(message)
-                .openTestPage(TestEnum.WS)
-                .validateCategoryItemNotPresent(CATEGORY_PATHNAME + 1);
-
+                .validateCategoryPresent(CATEGORY_PATHNAME + 1);
     }
 }

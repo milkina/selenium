@@ -3,11 +3,17 @@ package com.examclouds.pageObject.administration;
 import com.examclouds.model.Test;
 import com.examclouds.pageObject.administration.article.EditArticlePage;
 import com.examclouds.pageObject.administration.question.AddQuestionPage;
+import com.examclouds.pageObject.administration.user.UserHistoryPage;
 import com.examclouds.pageObject.base.BasePage;
 import com.examclouds.pageObject.base.MessagePage;
 import com.examclouds.pageObject.test.AddTestPage;
 import com.examclouds.pageObject.test.EditTestPage;
 import io.ddavison.conductor.Locomotive;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
+import static org.testng.Assert.assertEquals;
 
 /**
  * Created by Tatyana on 25.05.2016.
@@ -17,7 +23,6 @@ public class WelcomeAdminPage extends BasePage {
     public static final String LOC_USER_DIV = "div[id$='user%s'] div";
     public static final String LOC_TEST_HREF = "a[name='%sAdmin']";
     public static final String LOC_DELETE_ARTICLE_HREF = "a[name='deleteArticle%s']";
-    public static final String LOC_UP_TEST_HREF = "a[name='up%s']";
     public static final String LOC_EDIT_TEST_HREF = "a[name='editTest%s']";
     public static final String LOC_DELETE_TEST_BTN = "input[name='delete%s']";
     public static final String LOC_EDIT_ARTICLE_HREF = "a[name='editArticle%s']";
@@ -25,6 +30,7 @@ public class WelcomeAdminPage extends BasePage {
     public static final String LOC_ADD_QUESTION_HREF = "a[name='addQuestion']";
     public static final String LOC_ADD_TEST_HREF = "a[name='addTest']";
     public static final String LOC_VIEW_NOT_APPROVED_QUESTIONS_HREF = "a[name='viewNotApprovedQuestions']";
+    public static final String LOC_SEE_USER_HISTORY_HREF = "a[id='seeHistory%s']";
 
     public WelcomeAdminPage(Locomotive baseTest) {
         super(baseTest);
@@ -96,8 +102,20 @@ public class WelcomeAdminPage extends BasePage {
         return this;
     }
 
-    public WelcomeAdminPage clickUpTest(String testPath) {
-        test.click(String.format(LOC_UP_TEST_HREF, testPath));
+    public WelcomeAdminPage dragTest(String testPath, String nextTestPath) {
+        WebElement drag = test.driver.findElement(By.id(testPath));
+        WebElement drop = test.driver.findElement(By.id(nextTestPath));
+        Actions action = new Actions(test.driver);
+        action.clickAndHold(drag).moveToElement(drop).release(drop).perform();
+        return this;
+    }
+
+
+    public WelcomeAdminPage validateTestOrder(String testPath1, String testPath2) {
+        WebElement element = test.driver.findElement(
+                By.cssSelector(String.format("#%s + tr",
+                        testPath1)));
+        assertEquals(element.getAttribute("id"), testPath2);
         return this;
     }
 
@@ -119,5 +137,10 @@ public class WelcomeAdminPage extends BasePage {
     public ShowQuestionsPage viewNotApprovedQuestions() {
         test.click(LOC_VIEW_NOT_APPROVED_QUESTIONS_HREF);
         return new ShowQuestionsPage(test, "Questions -");
+    }
+
+    public UserHistoryPage seeUserHistory(String login) {
+        test.click(String.format(LOC_SEE_USER_HISTORY_HREF, login));
+        return new UserHistoryPage(test, "Questions -");
     }
 }
