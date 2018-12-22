@@ -93,6 +93,7 @@ public class ShowTestPage extends BasePage {
         WebElement drop = test.driver.findElement(By.id(nextCategoryPath));
         Actions action = new Actions(test.driver);
         action.clickAndHold(drag).moveToElement(drop).release(drop).perform();
+        waitForWindow(this.getTitle());
         return this;
     }
 

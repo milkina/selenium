@@ -16,6 +16,7 @@ public class ChangeTestPage extends BasePage {
     public static final String LOC_TITLE_INPUT = "textarea[name='TITLE']";
     public static final String LOC_IMG_INPUT = "input[name='ARTICLE_IMAGE']";
     public static final String LOC_SAVE_BTN = "input[name='Save']";
+    public static final String LOC_LANGUAGE_SELECT = "select[name='LANGUAGE']";
 
     public ChangeTestPage(Locomotive baseTest) {
         super(baseTest);
@@ -67,7 +68,12 @@ public class ChangeTestPage extends BasePage {
     }
 
     public ChangeTestPage setItomText(String str) {
-        setTextArea(str,"ICON_TEXT");
+        setTextArea(str, "ICON_TEXT");
+        return this;
+    }
+
+    public ChangeTestPage setLanguage(String str) {
+        test.selectOptionByValue(LOC_LANGUAGE_SELECT, str);
         return this;
     }
 
@@ -82,6 +88,7 @@ public class ChangeTestPage extends BasePage {
         setTestImgUrl(test.getArticle().getImgUrl());
         setArticleText(test.getArticle().getText());
         setItomText(test.getItomText());
+        setLanguage(test.getLanguageCode());
         return this;
     }
 

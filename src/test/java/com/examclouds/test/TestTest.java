@@ -37,7 +37,7 @@ public class TestTest extends BaseTest {
         Article articleEdited = new Article(article.getKeywords() + 1, article.getDescription() + 1,
                 article.getTitle() + 1, article.getText() + 1, article.getImgUrl() + 1);
         com.examclouds.model.Test testEdited = new com.examclouds.model.Test(
-                test1.getPathName() + 1, test1.getName() + 1, test1.getTags() + 1, test1.getItomText() + 1, articleEdited);
+                test1.getPathName() + 1, test1.getName() + 1, test1.getTags() + 1, test1.getItomText() + 1, articleEdited,"en");
         adminPage.openLoginPage()
                 .sysadminLogin();
         addTest(test1);
@@ -53,8 +53,7 @@ public class TestTest extends BaseTest {
                 .loadMessagePage()
                 .isMessagePresent("The test is added.")
                 .openAdminTab()
-                .verifyTestExist(test)
-        ;
+                .verifyTestExist(test);
     }
 
     private void deleteTest(com.examclouds.model.Test test) {
@@ -88,7 +87,6 @@ public class TestTest extends BaseTest {
                 .openAdminTab()
                 .verifyTestExist(testEdited)
                 .clickEditTest(testEdited.getPathName())
-                .validateData(testEdited)
-        ;
+                .validateData(testEdited);
     }
 }

@@ -52,6 +52,11 @@ public class EditTestPage extends ChangeTestPage {
         return this;
     }
 
+    public EditTestPage validateTestLanguage(String value) {
+        test.validateText(LOC_LANGUAGE_SELECT, value);
+        return this;
+    }
+
     public EditTestPage validateData(Test test) {
         validateTestName(test.getName());
         validateTestPathName(test.getPathName());
@@ -60,7 +65,7 @@ public class EditTestPage extends ChangeTestPage {
         validateTestKeywords(test.getArticle().getKeywords());
         validateTestDescription(test.getArticle().getDescription());
         validateTestTitle(test.getArticle().getTitle());
-
+        validateTestLanguage(test.getLanguageCode());
         return this;
     }
 }

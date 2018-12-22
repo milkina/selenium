@@ -9,6 +9,7 @@ public class Test {
     private String tags;
     private String itomText;
     private Article article;
+    private String languageCode;
 
     public Test(String pathName, String name) {
         this.pathName = pathName;
@@ -21,12 +22,13 @@ public class Test {
         this.tags = tags;
     }
 
-    public Test(String pathName, String name, String tags,String itomText, Article article) {
+    public Test(String pathName, String name, String tags, String itomText, Article article,String language) {
         this.pathName = pathName;
         this.name = name;
         this.tags = tags;
         this.article = article;
-        this.itomText =itomText;
+        this.itomText = itomText;
+        this.languageCode = language;
     }
 
     public String getPathName() {
@@ -67,5 +69,13 @@ public class Test {
 
     public void setItomText(String itomText) {
         this.itomText = itomText;
+    }
+
+    public String getLanguageCode() {
+        return languageCode;
+    }
+
+    public void setLanguageCode(String languageCode) {
+        this.languageCode = languageCode;
     }
 }

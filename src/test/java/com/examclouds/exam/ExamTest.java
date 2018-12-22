@@ -141,6 +141,7 @@ public class ExamTest extends BaseTest {
                     .validateExamResultPresent(categoryName);
         } finally {
             deleteQuestions(categoryPath, testPath);
+            deleteNotApprovedQuestions();
             homePage.openAdminTab().deleteUser(USER_LOGIN);
         }
     }
