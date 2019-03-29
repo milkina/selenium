@@ -1,7 +1,7 @@
 package com.examclouds.pageObject.test;
 
-import com.examclouds.pageObject.category.CategoryPage;
 import com.examclouds.pageObject.base.BasePage;
+import com.examclouds.pageObject.category.CategoryPage;
 import io.ddavison.conductor.Locomotive;
 
 /**

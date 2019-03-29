@@ -17,10 +17,10 @@ public class CommentTest extends BaseTest {
     public static final String TEST_PAGE_COMMENT = "Test Page Comment";
     public static final String CATEGORY_PAGE_COMMENT = "Category Page Comment";
     public static final String ARTICLE_PAGE_COMMENT = "Article Page Comment";
-    String categoryName = "Basic Concepts";
-    String categoryPathName = "basic-concepts";
-    String testName = "OCEJWSD 6";
-    HomePage homePage = new HomePage(this);
+    private String categoryName = "Basic Concepts";
+    private String categoryPathName = "basic-concepts";
+    private String testName = "OCEJWSD 6";
+    private HomePage homePage = new HomePage(this);
 
     @Test
     public void testCreateMainPageComment() {
@@ -52,7 +52,7 @@ public class CommentTest extends BaseTest {
         ArticlePage articlePage = homePage.openLoginPage()
                 .sysadminLogin()
                 .openArticleListTab()
-                .openArticle("/jpa-1.0/publications/basic-authentication-in-soap-web-service.jsp", "Secure(.)+");
+                .openArticle("publications/basic-authentication-in-soap-web-service.jsp", "Secure(.)+");
         processComment(ARTICLE_PAGE_COMMENT, articlePage);
     }
 

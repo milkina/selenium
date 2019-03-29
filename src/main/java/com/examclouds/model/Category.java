@@ -8,6 +8,7 @@ public class Category {
     private String pathName;
     private String image;
     private String description;
+    private String text;
     private String keywords;
     private Test test;
 
@@ -77,5 +78,13 @@ public class Category {
 
     public String getTitle() {
         return name + " - " + test.getName();
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }

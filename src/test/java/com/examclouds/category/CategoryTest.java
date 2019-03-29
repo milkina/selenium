@@ -15,6 +15,7 @@ public class CategoryTest extends BaseTest {
     public static final String CATEGORY_KEYWORDS = "key1,key2,key3";
     public static final String CATEGORY_DESCRIPTION = "New Description";
     public static final String CATEGORY_IMAGE = "/url/image";
+    public static final String CATEGORY_TEXT = "textТекст";
 
     WelcomeAdminPage adminPage = new WelcomeAdminPage(this);
 
@@ -22,6 +23,7 @@ public class CategoryTest extends BaseTest {
     public void addEditDeleteCategory() {
         Category category = new Category(CATEGORY_NAME, CATEGORY_PATHNAME, CATEGORY_DESCRIPTION, CATEGORY_KEYWORDS);
         category.setImage(CATEGORY_IMAGE);
+        category.setText(CATEGORY_TEXT);
 
         addCategory(testOCEJWSD.getPathName(), category, adminPage);
         editCategory(testOCEJWSD.getPathName(), category);
@@ -36,7 +38,7 @@ public class CategoryTest extends BaseTest {
                 .openAdminTab()
                 .openShowTestPage(testOCEJWSD.getPathName())
                 .dragCategory("dom-parser", "jaxp-parent")
-                .validateCategoriesOrder("jaxp-parent","dom-parser")
+                .validateCategoriesOrder("jaxp-parent", "dom-parser")
                 .dragCategory("dom-parser", "xml")
                 .validateCategoriesOrder("xml", "dom-parser");
     }
@@ -50,6 +52,9 @@ public class CategoryTest extends BaseTest {
         if (category.getImage() != null) {
             categoryNew.setImage(CATEGORY_IMAGE + 1);
         }
+        if (category.getText() != null) {
+            categoryNew.setText(CATEGORY_TEXT + 1);
+        }
 
         adminPage.openAdminTab()
                 .openShowTestPage(testPath)
@@ -62,7 +67,6 @@ public class CategoryTest extends BaseTest {
                 .isMessagePresent("The category is changed.")
                 .openTestPage(TestEnum.WS)
                 .openCategoryPage(CATEGORY_NAME + 1, testOCEJWSD.getName(), CATEGORY_PATHNAME + 1);
-        ;
     }
 
     private void addRemoveCategoryToTest() {

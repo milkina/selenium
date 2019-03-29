@@ -50,6 +50,16 @@ public class EditCategoryPage extends CategoryPage {
         return this;
     }
 
+    public EditCategoryPage validateCategoryText(String text) {
+        test.validateTextPresent(text);
+        return this;
+    }
+
+    public EditCategoryPage validateIndex(){
+        test.validateChecked(LOC_CATEGORY_INDEX_INPUT);
+        return this;
+    }
+
     public EditCategoryPage validateCategory(Category category) {
         validateCategoryIdPresent();
         validateCategoryName(category.getName());
@@ -57,6 +67,8 @@ public class EditCategoryPage extends CategoryPage {
         validateCategoryImage(category.getImage());
         validateCategoryKeywords(category.getKeywords());
         validateCategoryDescription(category.getDescription());
+        validateCategoryText(category.getText());
+        validateIndex();
         return this;
     }
 }

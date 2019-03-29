@@ -9,8 +9,7 @@ import io.ddavison.conductor.Locomotive;
 public class WelcomeRegisterPage extends BasePage {
     public static final String TITLE = "Welcome on ExamClouds";
     public static final String LOC_SPAN_MSG = "span[id$='welcomeText']";
-    public static final String WELCOME_TEXT = "%s, thanks for registering!\n" +
-            "Registered users are able to post comments and pass tests.";
+    public static final String WELCOME_TEXT = "%s, thanks for registering!";
 
     public WelcomeRegisterPage(Locomotive baseTest) {
         super(baseTest);

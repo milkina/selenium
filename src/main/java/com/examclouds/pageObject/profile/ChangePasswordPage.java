@@ -52,4 +52,9 @@ public class ChangePasswordPage extends BasePage {
         super.verifyAlertText(text);
         return this;
     }
+
+    public ChangePasswordPage validateTextPresent(String text) {
+        test.validateTextPresent(text);
+        return this;
+    }
 }

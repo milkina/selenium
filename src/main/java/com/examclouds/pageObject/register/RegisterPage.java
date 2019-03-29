@@ -10,12 +10,12 @@ import org.openqa.selenium.By;
  */
 public class RegisterPage extends BasePage {
     public static final String TITLE = "Register Form on ExamClouds";
-    public static final String LOC_INPUT_LOGIN = "input[name$='NEW_LOGIN']";
-    public static final String LOC_INPUT_PASSWORD = "input[name$='NEW_PASSWORD']";
+    public static final String LOC_INPUT_LOGIN = "input[name$='login']";
+    public static final String LOC_INPUT_PASSWORD = "input[name$='password']";
     public static final String LOC_INPUT_CONF_PASSWORD = "input[name$='confPassword']";
-    public static final String LOC_INPUT_FIRST_NAME = "input[name$='firstName']";
-    public static final String LOC_INPUT_LAST_NAME = "input[name$='lastName']";
-    public static final String LOC_INPUT_EMAIL = "input[name$='email']";
+    public static final String LOC_INPUT_FIRST_NAME = "input[name$='personInfo.firstName']";
+    public static final String LOC_INPUT_LAST_NAME = "input[name$='personInfo.lastName']";
+    public static final String LOC_INPUT_EMAIL = "input[name$='personInfo.email']";
 
     public static final String LOC_SUBMIT_BTN = "input[name$='Confirm']";
 

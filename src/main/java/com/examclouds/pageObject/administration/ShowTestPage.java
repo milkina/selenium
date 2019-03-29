@@ -13,7 +13,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 /**
  * Created by Tatyana on 07.06.2016.
@@ -84,7 +83,7 @@ public class ShowTestPage extends BasePage {
 
     public ShowTestPage clickDeleteCategory(String categoryPath) {
         test.click(String.format(LOC_DELETE_CATEGORY_HREF, categoryPath));
-        verifyAlertText("Do you want to delete " + categoryPath + " permanently?");
+        verifyAlertText("Do you want to delete " + categoryPath + "?");
         return this;
     }
 
@@ -99,7 +98,7 @@ public class ShowTestPage extends BasePage {
 
     public MessagePage clickRemoveFromTest(String categoryPath, String testPath) {
         test.click(String.format(LOC_DELETE_FROM_TEST_HREF, categoryPath));
-        verifyAlertText("Do you want to delete " + categoryPath + " category from " + testPath + " test?");
+        verifyAlertText("Do you want to delete " + categoryPath + " from " + testPath + "?");
         return new MessagePage(test);
     }
 

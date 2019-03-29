@@ -2,13 +2,8 @@ package com.examclouds.test;
 
 import com.examclouds.base.BaseTest;
 import com.examclouds.model.Article;
-import com.examclouds.pageObject.administration.ShowTestPage;
 import com.examclouds.pageObject.administration.WelcomeAdminPage;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
-import static org.testng.Assert.assertEquals;
 
 /**
  * Created by Tatyana on 19.01.2017.
@@ -51,7 +46,7 @@ public class TestTest extends BaseTest {
                 .setTestData(test)
                 .clickSave()
                 .loadMessagePage()
-                .isMessagePresent("The test is added.")
+                .isMessagePresent("The course is added.")
                 .openAdminTab()
                 .verifyTestExist(test);
     }
@@ -60,7 +55,7 @@ public class TestTest extends BaseTest {
         adminPage.openAdminTab()
                 .clickDeleteTest(test.getPathName())
                 .loadMessagePage()
-                .isMessagePresent("The test is deleted.")
+                .isMessagePresent("The course is deleted.")
                 .openAdminTab()
                 .verifyTestNotExist(test.getName())
         ;
@@ -82,7 +77,7 @@ public class TestTest extends BaseTest {
                 .setTestData(testEdited)
                 .clickSave()
                 .loadMessagePage()
-                .isMessagePresent("The test is changed.")
+                .isMessagePresent("The course is changed.")
 
                 .openAdminTab()
                 .verifyTestExist(testEdited)

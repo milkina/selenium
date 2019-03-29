@@ -28,10 +28,11 @@ abstract public class BasePage {
     public Locomotive test;
 
     public static final String LOC_LNK_HOMETAB = "li a[id$='home']";
+    public static final String LOC_LNK_COURSES_TAB = "li a[id$='courses']";
     public static final String LOC_LNK_MY_PROFILETAB = "li a[href$='/show-user-profile']";
-    public static final String LOC_LNK_ADMINTAB = "li a[href$='/administration/welcome.jsp']";
+    public static final String LOC_LNK_ADMINTAB = "li a[href$='/show-administration']";
     public static final String LOC_LNK_TESTS = "li a[href$='/tests']";
-    public static final String LOC_LNK_ARTICLESTAB = "li a[href$='/articles.jsp']";
+    public static final String LOC_LNK_ARTICLESTAB = "li a[href$='/show-all-articles']";
     public static final String LOC_LNK_LOGOUT = "a[id$='isLogin']";
 
     public static final String LOC_WRONG_MESSAGE = "span[id$='wrongMessage']";
@@ -44,7 +45,7 @@ abstract public class BasePage {
     public static final String LOC_DELETE_COMMENT_HREF = "div[class$='commentBody'] input[type$='checkbox'][value$='%s']";
     public static final String LOC_DELETE_COMMENT_BTN = "input[type$='submit']";
     public static final String LOC_COMMENT_BODY_DIV = "div[class$='commentBody'] div[id$='commentBody%s']";
-    public static final String LOC_ARTICLE_HREF = "a[href='%s']";
+    public static final String LOC_ARTICLE_HREF = "a[href='/jpa-1.0/%s']";
 
     //buttons
 
@@ -56,11 +57,11 @@ abstract public class BasePage {
     public static final String SYSADMIN_LOGIN = "sysadmin";
     public static final String SYSADMIN_PASSWORD = "NewPass5385";
 
-    public static final String USER_LOGIN = "testUser";
-    public static final String USER_PASSWORD = "testPassword";
-    public static final String USER_FIRST_NAME = "testFirstName";
-    public static final String USER_LAST_NAME = "testLastName";
-    public static final String USER_EMAIL = "testEmail";
+    public static final String USER_LOGIN = "тестUser";
+    public static final String USER_PASSWORD = "тестPassword";
+    public static final String USER_FIRST_NAME = "тестFirstName";
+    public static final String USER_LAST_NAME = "тестLastName";
+    public static final String USER_EMAIL = "testEmail@gmail.com";
 
 
     public BasePage(Locomotive baseTest) {
@@ -124,9 +125,6 @@ abstract public class BasePage {
 
     public BasePage menuExist() {
         test.validatePresent(BasePage.LOC_LNK_HOMETAB)
-                .validatePresent("li a[id='ocjp-ocpjp']")
-                .validatePresent(TestEnum.JPA.getLocatorName())
-                .validatePresent(TestEnum.WS.getLocatorName())
                 .validatePresent(BasePage.LOC_LNK_ARTICLESTAB);
         return this;
     }
@@ -199,6 +197,7 @@ abstract public class BasePage {
     }
 
     public TestPage openTestPage(TestEnum testEnum) {
+        test.click(LOC_LNK_COURSES_TAB);
         test.click(testEnum.getLocatorName());
         return new TestPage(test, testEnum.getTitleName());
     }

@@ -20,7 +20,7 @@ public class ShowTestExamQuestionPage extends AbstractShowExamQuestionPage {
     public ShowTestExamResultPage clickFinishBtn(String login) {
         test.click(LOC_FINISH_BTN);
 //        test.waitForWindow(getTitle());
-        return new ShowTestExamResultPage(test, login + " Test Result");
+        return new ShowTestExamResultPage(test, login + " | Test Result");
     }
 
     public ShowTestExamQuestionPage clickCheckbox(int i) {

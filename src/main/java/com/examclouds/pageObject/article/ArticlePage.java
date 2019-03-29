@@ -18,4 +18,10 @@ public class ArticlePage extends BasePage {
     public String getTitle() {
         return title;
     }
+
+    public ArticlePage validateTextPresent(String text) {
+        test.validateTextPresent(text);
+        return this;
+    }
+
 }

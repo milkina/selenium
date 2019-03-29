@@ -23,15 +23,13 @@ public class ProfileTest extends BaseTest {
                     .openMyProfile()
                     .setPersonData(person1)
                     .submitPersonData()
-                    .acceptSubmitData()
                     .verifyPersonData(person1)
                     .setPersonData(person2)
                     .submitPersonData()
-                    .acceptSubmitData()
                     .verifyPersonData(person2)
                     .logout();
         } finally {
-            homePage.openLoginPage().sysadminLogin().openAdminTab().deleteUser(USER_LOGIN);
+           homePage.openLoginPage().sysadminLogin().openAdminTab().deleteUser(USER_LOGIN);
         }
     }
 
@@ -45,12 +43,10 @@ public class ProfileTest extends BaseTest {
                     .openMyProfile()
                     .openChangePasswordWindow()
                     .verifyLoginText(USER_LOGIN)
-                    .clickConfirm()
-                    .verifyAlertText("Please enter all required fields.")
                     .setPassword(USER_PASSWORD)
                     .setConfPassword(USER_PASSWORD + 1)
                     .clickConfirm()
-                    .verifyAlertText("Password should be the same as Confirm Password.")
+                    .validateTextPresent("Password and Confirm Password should be the same. Please re-enter.")
                     .setPassword(USER_PASSWORD + 1)
                     .setConfPassword(USER_PASSWORD + 1)
                     .clickConfirm()
@@ -105,6 +101,5 @@ public class ProfileTest extends BaseTest {
             homePage.openLoginPage().sysadminLogin().openAdminTab().deleteUser(USER_LOGIN);
             deleteCategory(category1.getTest().getPathName(), category1.getPathName(), homePage);
         }
-
     }
 }

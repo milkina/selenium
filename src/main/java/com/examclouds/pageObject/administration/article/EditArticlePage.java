@@ -11,6 +11,7 @@ public class EditArticlePage extends BasePage {
     public static final String LOC_IMAGE_INPUT = "input[name$='ARTICLE_IMAGE']";
     public static final String LOC_TITLE_INPUT = "input[name$='TITLE']";
     public static final String LOC_SAVE_BTN = "input[name$='Save']";
+    public static final String LOC_INDEX_CHECKBOX = "input[name$='index']";
     public static final String LOC_KEYWORDS_INPUT = "textarea[name='keywords']";
     public static final String LOC_DESCRIPTION_INPUT = "textarea[name='description']";
     public EditArticlePage(Locomotive baseTest) {
@@ -34,6 +35,11 @@ public class EditArticlePage extends BasePage {
 
     public EditArticlePage setDescription(String value){
         test.setText(LOC_DESCRIPTION_INPUT, value);
+        return this;
+    }
+
+    public EditArticlePage setText(String value){
+        setTextArea(value, "ARTICLE_TEXT");
         return this;
     }
 
@@ -64,6 +70,11 @@ public class EditArticlePage extends BasePage {
 
     public EditArticlePage validateTitle(String title){
         test.validateText(LOC_TITLE_INPUT,title);
+        return this;
+    }
+
+    public EditArticlePage validateIndex(){
+        test.validateChecked(LOC_INDEX_CHECKBOX);
         return this;
     }
 

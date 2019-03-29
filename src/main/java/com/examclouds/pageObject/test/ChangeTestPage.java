@@ -8,13 +8,13 @@ import io.ddavison.conductor.Locomotive;
  * Created by Tatyana on 29.01.2017.
  */
 public class ChangeTestPage extends BasePage {
-    public static final String LOC_TEST_NAME_INPUT = "input[name='testName']";
-    public static final String LOC_TEST_PATHNAME_INPUT = "input[name='TEST_PATH']";
-    public static final String LOC_TEST_TAGS_INPUT = "input[name='TEST_TAGS']";
-    public static final String LOC_TEST_KEYWORDS_TEXTAREA = "textarea[name='keywords']";
-    public static final String LOC_DESCRIPTION_INPUT = "textarea[name='description']";
-    public static final String LOC_TITLE_INPUT = "textarea[name='TITLE']";
-    public static final String LOC_IMG_INPUT = "input[name='ARTICLE_IMAGE']";
+    public static final String LOC_TEST_NAME_INPUT = "input[name='name']";
+    public static final String LOC_TEST_PATHNAME_INPUT = "input[name='pathName']";
+    public static final String LOC_TEST_TAGS_INPUT = "input[name='tags']";
+    public static final String LOC_TEST_KEYWORDS_TEXTAREA = "textarea[name='article.keywords']";
+    public static final String LOC_DESCRIPTION_INPUT = "textarea[name='article.description']";
+    public static final String LOC_TITLE_INPUT = "textarea[name='article.title']";
+    public static final String LOC_IMG_INPUT = "input[name='article.image']";
     public static final String LOC_SAVE_BTN = "input[name='Save']";
     public static final String LOC_LANGUAGE_SELECT = "select[name='LANGUAGE']";
 
@@ -68,7 +68,7 @@ public class ChangeTestPage extends BasePage {
     }
 
     public ChangeTestPage setItomText(String str) {
-        setTextArea(str, "ICON_TEXT");
+        setTextArea(str, "iconText");
         return this;
     }
 

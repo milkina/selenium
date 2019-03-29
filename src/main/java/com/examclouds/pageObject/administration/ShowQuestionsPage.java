@@ -5,6 +5,7 @@ import com.examclouds.pageObject.administration.question.EditQuestionPage;
 import com.examclouds.pageObject.administration.question.ShowQuestionEntryPage;
 import com.examclouds.pageObject.administration.question.ShowQuestionPicturePage;
 import com.examclouds.pageObject.base.BasePage;
+import com.examclouds.pageObject.base.MessagePage;
 import io.ddavison.conductor.Locomotive;
 
 /**
@@ -16,6 +17,7 @@ public class ShowQuestionsPage extends BasePage {
     public static final String LOC_GO_TO_QUESTION_HREF = "a[name='goToQuestion']";
     public static final String LOC_SHOW_PICTURE_QUESTION_HREF = "a[name='showPicture']";
     public static final String LOC_EDIT_QUESTION_HREF = "a[name='editQuestion']";
+    public static final String LOC_APPROVE_QUESTION_HREF = "a[name='approveQuestion']";
     private String title;
 
     public ShowQuestionsPage(Locomotive baseTest, String title) {
@@ -88,5 +90,11 @@ public class ShowQuestionsPage extends BasePage {
     public EditQuestionPage openEditQuestionPage() {
         test.click(LOC_EDIT_QUESTION_HREF);
         return new EditQuestionPage(test);
+    }
+
+    public MessagePage approveQuestion() {
+        test.click(LOC_APPROVE_QUESTION_HREF);
+        verifyAlertText("Are you sure you want to approve the question?");
+        return new MessagePage(test);
     }
 }

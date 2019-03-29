@@ -55,7 +55,7 @@ public class WelcomeAdminPage extends BasePage {
         return verifyUserExist(login)
                 .clickDeleteUser(login)
                 .loadMessagePage()
-                .isMessagePresent("User is removed.");
+                .isMessagePresent("Person is removed.");
     }
 
     public ShowTestPage openShowTestPage(String testPath) {
@@ -98,7 +98,7 @@ public class WelcomeAdminPage extends BasePage {
 
     public WelcomeAdminPage clickDeleteTest(String testPath) {
         test.click(String.format(LOC_DELETE_TEST_BTN, testPath));
-        verifyAlertText("Do you want to delete " + testPath + " test?");
+        verifyAlertText("Do you want to delete " + testPath + "?");
         return this;
     }
 

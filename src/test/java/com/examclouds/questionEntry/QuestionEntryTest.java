@@ -36,6 +36,8 @@ public class QuestionEntryTest extends BaseTest {
                     .openShowTestPage(category1.getTest().getPathName())
                     .openShowQuestionsPage(category1.getPathName(), category1.getTest().getPathName(), category1.getTitle())
                     .validateQuestionCount(0);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         } finally {
             deleteCategory(category1.getTest().getPathName(), category1.getPathName(), homePage);
         }
@@ -104,7 +106,9 @@ public class QuestionEntryTest extends BaseTest {
                     .openShowQuestionsPage(category2.getPathName(), category2.getTest().getPathName(), category2.getTitle())
                     .validateQuestionEntryNotPresent(questionEntry2)
                     .validateQuestionCount(0);
-        } finally {
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }finally {
             deleteCategory(category1.getTest().getPathName(), category1.getPathName(), homePage);
             deleteCategory(category2.getTest().getPathName(), category2.getPathName(), homePage);
         }

@@ -58,7 +58,7 @@ public class ExamTest extends BaseTest {
                     .openCategoryPage(categoryName, testName, categoryPathName)
                     .clickStartQuizButton()
                     .clickStartQuizButton()
-                    .waitForWindow(title);
+                    .waitForWindow(testName + " Quiz");
             Integer number = showExamQuestionPage.getQuestionsNumber();
             for (int i = 1; i < number; i++) {
                 showExamQuestionPage.validatePage(i, number)
@@ -95,7 +95,7 @@ public class ExamTest extends BaseTest {
                 .clickStartQuizButton()
                 .validateOptionsNotPresent()
                 .clickStartQuizButton()
-                .waitForWindow(title)
+                .waitForWindow(testName + " Quiz")
                 .clickCheckbox()
                 .verifyAlertText("Please log in or register to have a possibility to mark questions.");
         Integer number = showExamQuestionPage.getQuestionsNumber();
@@ -139,6 +139,8 @@ public class ExamTest extends BaseTest {
                     .openAdminTab()
                     .seeUserHistory(USER_LOGIN)
                     .validateExamResultPresent(categoryName);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         } finally {
             deleteQuestions(categoryPath, testPath);
             deleteNotApprovedQuestions();

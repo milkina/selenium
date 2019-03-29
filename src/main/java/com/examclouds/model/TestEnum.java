@@ -18,7 +18,7 @@ public enum TestEnum {
     }
 
     public String getLocatorName() {
-        return String.format("li a[id='%s']", name);
+        return String.format("a[id='%s']", name);
     }
 
     public String getTitleName() {
