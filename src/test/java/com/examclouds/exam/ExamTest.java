@@ -47,7 +47,7 @@ public class ExamTest extends BaseTest {
 
             ShowExamQuestionPage showExamQuestionPage = homePage
                     .openTestPage(TestEnum.WS)
-                    .openCategoryPage(categoryName, testName, categoryPathName)
+                    .openCategoryPage(testName, categoryPathName)
                     .clickStartQuizButton()
                     .validateOptionsPresent()
                     .selectOption(ExamOptions.ANSWERED.toString())
@@ -55,7 +55,7 @@ public class ExamTest extends BaseTest {
                     .loadMessagePage()
                     .isMessagePresent("There are no questions selected. Either you have already answered all the questions or the selected category is empty.")
                     .openTestPage(TestEnum.WS)
-                    .openCategoryPage(categoryName, testName, categoryPathName)
+                    .openCategoryPage(testName, categoryPathName)
                     .clickStartQuizButton()
                     .clickStartQuizButton()
                     .waitForWindow(testName + " Quiz");
@@ -72,7 +72,8 @@ public class ExamTest extends BaseTest {
                         .clickPreviousButton();
             }
 
-            showExamQuestionPage.openCategoryPage(categoryName, testName, categoryPathName)
+            showExamQuestionPage.openTestPage(TestEnum.WS)
+                    .openCategoryPage(testName, categoryPathName)
                     .clickStartQuizButton()
                     .selectOption(ExamOptions.NOT_ANSWERED.toString())
                     .clickStartQuizButton()
@@ -91,7 +92,7 @@ public class ExamTest extends BaseTest {
     public void testStartExamWithoutLogin() {
         ShowExamQuestionPage showExamQuestionPage = homePage
                 .openTestPage(TestEnum.WS)
-                .openCategoryPage(categoryName, testName, categoryPathName)
+                .openCategoryPage(testName, categoryPathName)
                 .clickStartQuizButton()
                 .validateOptionsNotPresent()
                 .clickStartQuizButton()
@@ -126,7 +127,7 @@ public class ExamTest extends BaseTest {
                     .openLoginPage()
                     .login(USER_LOGIN, USER_PASSWORD)
                     .openTestPage(TestEnum.WS)
-                    .openCategoryPage(categoryName, testName, categoryPathName)
+                    .openCategoryPage(testName, categoryPathName)
                     .clickStartTestButton();
             goThroughQuestions(showTestExamQuestionPage);
             showTestExamQuestionPage.clickFinishBtn(USER_LOGIN)

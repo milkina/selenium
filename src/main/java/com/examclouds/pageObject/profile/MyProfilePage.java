@@ -24,8 +24,8 @@ public class MyProfilePage extends BasePage {
     public static final String LOC_INPUT_EMAIL = "input[name$='email']";
     public static final By LOC_SAVE_BTN = By.xpath("//input[@name='Save']");
     public static final String LOC_CHANGE_PSWD_BTN = "input[name$='ChangePassword']";
-    public static final String LOC_ADD_QUESTION_HRF = "a[name='addQuestion']";
-    public static final String LOC_SEE_MY_QUESTIONS_HREF = "a[name='myQuestions']";
+    public static final String LOC_ADD_QUESTION_HRF = "a[id='addQuestion']";
+    public static final String LOC_SEE_MY_QUESTIONS_HREF = "a[id='myQuestions']";
 
     public MyProfilePage(Locomotive baseTest) {
         super(baseTest);

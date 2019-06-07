@@ -2,12 +2,11 @@ package com.examclouds.pageObject.exam;
 
 import com.examclouds.pageObject.test.TestPage;
 import io.ddavison.conductor.Locomotive;
-import org.openqa.selenium.By;
 
 public class AbstractShowExamQuestionPage extends TestPage {
-    public static final By LOC_NEXT_BTN = By.xpath("//input[@name='NEXT']");
-    public static final String LOC_PREVIOUS_BTN = "input[name$='PREVIOUS']";
-    public static final String LOC_QUESTION_NUMBER_SPAN = "span[id$='questionEntryNumber']";
+    public static final String LOC_NEXT_BTN = "a[class$='nextHref']";
+    public static final String LOC_PREVIOUS_BTN = "a[class$='previousHref']";
+    public static final String LOC_QUESTION_NUMBER_DIV = "div[id$='questionEntryNumber']";
     private String title;
 
     public AbstractShowExamQuestionPage(Locomotive baseTest, String title) {
@@ -21,15 +20,14 @@ public class AbstractShowExamQuestionPage extends TestPage {
     }
 
     public AbstractShowExamQuestionPage validatePage(int i, int number) {
-        validateCategoryMenuPresent()
-                .validateCommentSectionPresent();
+                validateCommentSectionPresent();
         validateButtons(i , number)
-                .validateQuestionNumberSpan(i  + "/" + number);
+        .validateQuestionNumberSpan(i  + "/" + number);
         return this;
     }
 
     public AbstractShowExamQuestionPage validateQuestionNumberSpan(String text) {
-        test.validateText(LOC_QUESTION_NUMBER_SPAN, text);
+        test.validateText(LOC_QUESTION_NUMBER_DIV, text);
         return this;
     }
 

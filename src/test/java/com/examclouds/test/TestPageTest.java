@@ -19,19 +19,15 @@ public class TestPageTest extends BaseTest {
 
     @Test
     public void testTestPagesLoaded() {
-            homePage.openTestPage(TestEnum.JPA)
-                    .validateCategoryMenuPresent()
-                    .validateCommentSectionPresent()
-            ;
+        homePage.openTestPage(TestEnum.JPA)
+                .validateCommentSectionPresent();
     }
 
     @Test
     public void testCategoryPageLoaded() {
         homePage.openTestPage(TestEnum.WS)
-                .openCategoryPage(CATEGORY_NAME, TEST_NAME, CATEGORY_PATHNAME)
+                .openCategoryPage(TEST_NAME, CATEGORY_PATHNAME)
                 .validateStartQuizButtonPresent()
-              //  .validateOptionsNotPresent()
-                .validateCategoryMenuPresent()
                 .validateCommentSectionPresent()
         ;
     }
@@ -41,11 +37,8 @@ public class TestPageTest extends BaseTest {
         homePage.openLoginPage()
                 .login(USER_LOGIN, USER_PASSWORD)
                 .openTestPage(TestEnum.WS)
-                .openCategoryPage(CATEGORY_NAME, TEST_NAME, CATEGORY_PATHNAME)
+                .openCategoryPage(TEST_NAME, CATEGORY_PATHNAME)
                 .validateStartQuizButtonPresent()
-              //  .clickStartQuizButton()
-               // .validateOptionsPresent()
-                .validateCategoryMenuPresent()
                 .validateCommentSectionPresent()
         ;
     }

@@ -24,9 +24,9 @@ public class BaseTest extends Locomotive {
     protected Test testOCEJWSD = new Test("web-services", "OCEJWSD 6");
     protected Category category1 = new Category("Category1", "category1", testOCEJWSD);
 
-    protected Test testOCJP = new Test("ocjp", "OCJP 6");
+    protected Test ocpjp8 = new Test("ocpjp8", "OCPJP 8");
     protected Test testJPA = new Test("jpa", "OCEJPAD 6");
-    protected Category category2 = new Category("Category2", "category2", testOCJP);
+    protected Category category2 = new Category("Category2", "category2", ocpjp8);
     protected Category category3 = new Category("Category3", "category3", testJPA);
     protected QuestionEntry questionEntry1 = new QuestionEntry("question2", "answer2");
     protected static TestQuestionEntry[] testQuestionEntries = new TestQuestionEntry[3];
@@ -78,7 +78,7 @@ public class BaseTest extends Locomotive {
                 .profileTabNotPresent()
                 .adminTabNotPresent()
                 .loginHrefPresent()
-                .registerHrefPresent()
+                //.registerHrefPresent()
                 .logoutNotPresent();
     }
 

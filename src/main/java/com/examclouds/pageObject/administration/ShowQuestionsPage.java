@@ -13,11 +13,11 @@ import io.ddavison.conductor.Locomotive;
  */
 public class ShowQuestionsPage extends BasePage {
     public static final String LOC_CLEAR_HISTORY_BTN = "input[name='clearHistory']";
-    public static final String LOC_DELETE_QUESTION_HREF = "a[name='deleteQuestion']";
-    public static final String LOC_GO_TO_QUESTION_HREF = "a[name='goToQuestion']";
-    public static final String LOC_SHOW_PICTURE_QUESTION_HREF = "a[name='showPicture']";
-    public static final String LOC_EDIT_QUESTION_HREF = "a[name='editQuestion']";
-    public static final String LOC_APPROVE_QUESTION_HREF = "a[name='approveQuestion']";
+    public static final String LOC_DELETE_QUESTION_HREF = "a[class='showAnswer deleteQuestion']";
+    public static final String LOC_GO_TO_QUESTION_HREF = "a[class='showAnswer goToQuestion']";
+    public static final String LOC_SHOW_PICTURE_QUESTION_HREF = "a[class='showAnswer showPicture']";
+    public static final String LOC_EDIT_QUESTION_HREF = "a[class='showAnswer editQuestion']";
+    public static final String LOC_APPROVE_QUESTION_HREF = "a[class='showAnswer approveQuestion']";
     private String title;
 
     public ShowQuestionsPage(Locomotive baseTest, String title) {

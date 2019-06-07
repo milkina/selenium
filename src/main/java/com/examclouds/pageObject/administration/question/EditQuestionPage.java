@@ -11,7 +11,7 @@ import org.openqa.selenium.By;
  * Created by Tatyana on 09.12.2016.
  */
 public class EditQuestionPage extends AddQuestionPage {
-    public static final String LOC_UP_HREF = "a[name='up']";
+    public static final String LOC_UP_HREF = "a[id='up']";
     public static final String LOC_DELETE_BTN = "input[id='deleteAnswer%s']";
 
     @Override

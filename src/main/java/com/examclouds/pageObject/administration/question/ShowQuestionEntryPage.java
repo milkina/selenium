@@ -9,7 +9,7 @@ import io.ddavison.conductor.Locomotive;
  * Created by Tatyana on 15.12.2016.
  */
 public class ShowQuestionEntryPage extends BasePage {
-    private static final String LOC_SEE_OTHER_QUESTIONS_HREF = "a[name='seeOtherQuestions']";
+    private static final String LOC_SEE_OTHER_QUESTIONS_HREF = "a[id='seeOtherQuestions']";
     private String title;
 
     public ShowQuestionEntryPage(Locomotive baseTest, String title) {

@@ -1,19 +1,12 @@
 package com.examclouds.pageObject.exam;
 
-import com.examclouds.model.AbstractQuestionEntry;
-import com.examclouds.pageObject.test.TestPage;
 import io.ddavison.conductor.Locomotive;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.testng.Assert;
-
-import java.util.StringTokenizer;
 
 /**
  * Created by Tatyana on 30.05.2016.
  */
 public class ShowExamQuestionPage extends AbstractShowExamQuestionPage {
-    public static final String LOC_ANSWER_BTN = "input[id$='a1']";
+    public static final String LOC_ANSWER_BTN = "a[id$='a1']";
     public static final String LOC_ANSWER_DIV = "div[id$='answer1']";
     public static final String LOC_CHECKBOX = "input[name='isAnswered']";
     public static final String ANSWER_READ_TEXT = "Read Answer";
@@ -49,7 +42,7 @@ public class ShowExamQuestionPage extends AbstractShowExamQuestionPage {
     }
 
     private Integer getInteger(int i) {
-        String number = test.getText(LOC_QUESTION_NUMBER_SPAN);
+        String number = test.getText(LOC_QUESTION_NUMBER_DIV);
         String numbers[] = number.split("/");
         return Integer.valueOf(numbers[i]);
     }

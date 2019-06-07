@@ -18,15 +18,15 @@ import static org.testng.Assert.assertEquals;
  * Created by Tatyana on 07.06.2016.
  */
 public class ShowTestPage extends BasePage {
-    public static final String LOC_SHOW_QUESTIONS_HREF = "a[name='CATEGORY_PATH=%s&TEST_PATH=%s&TYPE=QUESTION']";
-    public static final String LOC_SHOW_TEST_QUESTIONS_HREF = "a[name='CATEGORY_PATH=%s&TEST_PATH=%s&TYPE=TEST']";
-    public static final String LOC_ADD_QUESTION_HREF = "a[name='addQuestion%s']";
-    public static final String LOC_CREATE_CATEGORY_HREF = "a[name='createCategory']";
-    public static final String LOC_ADD_CATEGORY_HREF = "a[name='addCategory']";
-    public static final String LOC_DELETE_CATEGORY_HREF = "input[name='delete%s']";
-    public static final String LOC_DELETE_FROM_TEST_HREF = "input[name='removeFromTest%s']";
-    public static final String LOC_EDIT_CATEGORY_HREF = "a[name='edit%s']";
-    public static final String LOC_MOVE_QUESTIONS_HREF = "a[name='moveQuestions%s']";
+    public static final String LOC_SHOW_QUESTIONS_HREF = "a[id='CATEGORY_PATH=%s&TEST_PATH=%s&TYPE=QUESTION']";
+    public static final String LOC_SHOW_TEST_QUESTIONS_HREF = "a[id='CATEGORY_PATH=%s&TEST_PATH=%s&TYPE=TEST']";
+    public static final String LOC_ADD_QUESTION_HREF = "a[id='addQuestion%s']";
+    public static final String LOC_CREATE_CATEGORY_HREF = "a[id='createCategory']";
+    public static final String LOC_ADD_CATEGORY_HREF = "a[id='addCategory']";
+    public static final String LOC_DELETE_CATEGORY_HREF = "input[id='delete%s']";
+    public static final String LOC_DELETE_FROM_TEST_HREF = "input[id='removeFromTest%s']";
+    public static final String LOC_EDIT_CATEGORY_HREF = "a[id='edit%s']";
+    public static final String LOC_MOVE_QUESTIONS_HREF = "a[id='moveQuestions%s']";
 
     public ShowTestPage(Locomotive baseTest) {
         super(baseTest);

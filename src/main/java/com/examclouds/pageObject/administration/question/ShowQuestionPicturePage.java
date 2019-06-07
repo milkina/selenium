@@ -8,7 +8,7 @@ import io.ddavison.conductor.Locomotive;
  * Created by Tatyana on 15.12.2016.
  */
 public class ShowQuestionPicturePage extends BasePage {
-    private static final String LOC_READ_ANSWER_HREF = "a[name='readAnswer']";
+    private static final String LOC_READ_ANSWER_HREF = "a[id='readAnswer']";
     private String title;
 
     public ShowQuestionPicturePage(Locomotive baseTest, String title) {

@@ -27,16 +27,17 @@ abstract public class BasePage {
 
     public Locomotive test;
 
-    public static final String LOC_LNK_HOMETAB = "li a[id$='home']";
+    public static final String LOC_LNK_HOMETAB = "a[id$='home']";
     public static final String LOC_LNK_COURSES_TAB = "li a[id$='courses']";
     public static final String LOC_LNK_MY_PROFILETAB = "li a[href$='/show-user-profile']";
+    public static final String LOC_LNK_USER_LOGIN = "a[id$='userLogin']";
     public static final String LOC_LNK_ADMINTAB = "li a[href$='/show-administration']";
     public static final String LOC_LNK_TESTS = "li a[href$='/tests']";
     public static final String LOC_LNK_ARTICLESTAB = "li a[href$='/show-all-articles']";
     public static final String LOC_LNK_LOGOUT = "a[id$='isLogin']";
 
     public static final String LOC_WRONG_MESSAGE = "span[id$='wrongMessage']";
-    public static final String LOC_PERSON_LOGIN = "span[id$='personLogin']";
+    public static final String LOC_PERSON_LOGIN = "a[id$='userLogin']";
 
     public static final String LOC_COMMENT_TEXTAREA = "textarea[name='commentText']";
     public static final String LOC_COMMENT_BTN = "input[name='addComment']";
@@ -49,8 +50,8 @@ abstract public class BasePage {
 
     //buttons
 
-    public static final By LOC_LNK_REGISTER = By.xpath("//a[@id='registerHref']");
-    public static final String LOC_LNK_LOGIN = "a[id='loginHref']";
+    public static final String LOC_LNK_REGISTER = "a[href$='/register']";
+    public static final String LOC_LNK_LOGIN = "a[id='my-profile']";
 
     public static final String WRONG_USER_LOGIN = "wrongUserLogin";
     public static final String WRONG_USER_PASSWORD = "wrongUserPassword";
@@ -83,8 +84,9 @@ abstract public class BasePage {
     }
 
     public RegisterPage openRegisterPage() {
+        openLoginPage();
         test.click(LOC_LNK_REGISTER);
-        test.waitForElement(LOC_LNK_REGISTER);
+      //  test.waitForElement(By.cssSelector(LOC_LNK_REGISTER));
         return new RegisterPage(test);
     }
 
@@ -104,12 +106,16 @@ abstract public class BasePage {
     }
 
     public BasePage logout() {
+        test.hoverOver(LOC_LNK_USER_LOGIN);
+        test.waitForElement(By.cssSelector(LOC_LNK_LOGOUT));
         test.click(LOC_LNK_LOGOUT);
         //   .waitForElement(LOC_LNK_LOGOUT);
         return this;
     }
 
     public WelcomeAdminPage openAdminTab() {
+        test.hoverOver(LOC_LNK_USER_LOGIN);
+        test.waitForElement(By.cssSelector(LOC_LNK_ADMINTAB));
         test.click(LOC_LNK_ADMINTAB);
         return new WelcomeAdminPage(test);
     }
@@ -176,6 +182,7 @@ abstract public class BasePage {
     }
 
     public MyProfilePage openMyProfile() {
+        test.hoverOver(LOC_LNK_USER_LOGIN);
         test.click(LOC_LNK_MY_PROFILETAB);
         return new MyProfilePage(test);
     }
@@ -197,7 +204,9 @@ abstract public class BasePage {
     }
 
     public TestPage openTestPage(TestEnum testEnum) {
-        test.click(LOC_LNK_COURSES_TAB);
+        test.hoverOver(LOC_LNK_COURSES_TAB);
+        test.waitForElement(By.cssSelector(testEnum.getLocatorName()));
+        sleep();
         test.click(testEnum.getLocatorName());
         return new TestPage(test, testEnum.getTitleName());
     }

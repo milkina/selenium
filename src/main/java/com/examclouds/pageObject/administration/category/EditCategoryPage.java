@@ -7,7 +7,7 @@ import io.ddavison.conductor.Locomotive;
  * Created by Tatyana on 20.06.2016.
  */
 public class EditCategoryPage extends CategoryPage {
-    public static final String LOC_CATEGORY_ID_SPAN = "span[name='categoryId']";
+    public static final String LOC_CATEGORY_ID_SPAN = "span[id='categoryId']";
 
     public EditCategoryPage(Locomotive baseTest) {
         super(baseTest);

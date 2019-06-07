@@ -21,15 +21,15 @@ import static org.testng.Assert.assertEquals;
 public class WelcomeAdminPage extends BasePage {
     public static final String LOC_USER_DIV_HREF = "div[id$='user%s'] div a";
     public static final String LOC_USER_DIV = "div[id$='user%s'] div";
-    public static final String LOC_TEST_HREF = "a[name='%sAdmin']";
-    public static final String LOC_DELETE_ARTICLE_HREF = "a[name='deleteArticle%s']";
-    public static final String LOC_EDIT_TEST_HREF = "a[name='editTest%s']";
-    public static final String LOC_DELETE_TEST_BTN = "input[name='delete%s']";
-    public static final String LOC_EDIT_ARTICLE_HREF = "a[name='editArticle%s']";
-    public static final String LOC_ADD_ARTICLE_HREF = "a[name='addArticle']";
-    public static final String LOC_ADD_QUESTION_HREF = "a[name='addQuestion']";
-    public static final String LOC_ADD_TEST_HREF = "a[name='addTest']";
-    public static final String LOC_VIEW_NOT_APPROVED_QUESTIONS_HREF = "a[name='viewNotApprovedQuestions']";
+    public static final String LOC_TEST_HREF = "a[id='%sAdmin']";
+    public static final String LOC_DELETE_ARTICLE_HREF = "a[id='deleteArticle%s']";
+    public static final String LOC_EDIT_TEST_HREF = "a[id='editTest%s']";
+    public static final String LOC_DELETE_TEST_BTN = "input[id='delete%s']";
+    public static final String LOC_EDIT_ARTICLE_HREF = "a[id='editArticle%s']";
+    public static final String LOC_ADD_ARTICLE_HREF = "a[id='addArticle']";
+    public static final String LOC_ADD_QUESTION_HREF = "a[id='addQuestion']";
+    public static final String LOC_ADD_TEST_HREF = "a[id='addTest']";
+    public static final String LOC_VIEW_NOT_APPROVED_QUESTIONS_HREF = "a[id='viewNotApprovedQuestions']";
     public static final String LOC_SEE_USER_HISTORY_HREF = "a[id='seeHistory%s']";
 
     public WelcomeAdminPage(Locomotive baseTest) {

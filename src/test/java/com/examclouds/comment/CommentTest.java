@@ -43,7 +43,7 @@ public class CommentTest extends BaseTest {
         CategoryPage categoryPage = homePage.openLoginPage()
                 .sysadminLogin()
                 .openTestPage(TestEnum.WS)
-                .openCategoryPage(categoryName, testName, categoryPathName);
+                .openCategoryPage( testName, categoryPathName);
         processComment(CATEGORY_PAGE_COMMENT, categoryPage);
     }
 

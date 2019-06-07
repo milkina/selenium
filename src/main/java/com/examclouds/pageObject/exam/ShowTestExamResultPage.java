@@ -18,8 +18,8 @@ public class ShowTestExamResultPage extends BasePage {
 
     public ShowTestExamResultPage validatePage() {
         test.validateTextPresent("Test is passed.");
-        test.validateTextPresent("100.0% answers are correct.");
-        test.validateTextPresent("3 from 3");
+        test.validateTextPresent("100%");
+        test.validateTextPresent("answers are correct");
         return this;
     }
 }

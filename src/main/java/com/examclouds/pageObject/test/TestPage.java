@@ -10,7 +10,7 @@ import io.ddavison.conductor.Locomotive;
 public class TestPage extends BasePage {
     public static final String LOC_CATEGORY_MENU_DIV = "div[id$='categoryMenuDiv']";
     public static final String LOC_COMMENT_DIV = "div[id$='commentDiv']";
-    public static final String LOC_CATEGORY_MENU_ITEM = "div[id$='categoryMenuDiv'] div a[id='categoryItem%s']";
+    public static final String LOC_CATEGORY_MENU_ITEM = "div[id$='categories'] div p a[id='categoryItem%s']";
     private String title;
 
     public TestPage(Locomotive baseTest, String title) {
@@ -23,7 +23,7 @@ public class TestPage extends BasePage {
         return title;
     }
 
-    public CategoryPage openCategoryPage(String categoryName, String testName, String categoryPathName) {
+    public CategoryPage openCategoryPage(String testName, String categoryPathName) {
         title = testName;
         test.click(String.format(LOC_CATEGORY_MENU_ITEM, categoryPathName));
         return new CategoryPage(test, title);
@@ -31,11 +31,6 @@ public class TestPage extends BasePage {
 
     public TestPage validateCategoryItemNotPresent(String categoryPathName) {
         test.validateNotPresent(String.format(LOC_CATEGORY_MENU_ITEM, categoryPathName));
-        return this;
-    }
-
-    public TestPage validateCategoryMenuPresent() {
-        test.validatePresent(LOC_CATEGORY_MENU_DIV);
         return this;
     }
 

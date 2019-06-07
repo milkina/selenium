@@ -17,7 +17,7 @@ public class CategoryTest extends BaseTest {
     public static final String CATEGORY_IMAGE = "/url/image";
     public static final String CATEGORY_TEXT = "textТекст";
 
-    WelcomeAdminPage adminPage = new WelcomeAdminPage(this);
+    private WelcomeAdminPage adminPage = new WelcomeAdminPage(this);
 
     @Test
     public void addEditDeleteCategory() {
@@ -66,12 +66,12 @@ public class CategoryTest extends BaseTest {
                 .loadMessagePage()
                 .isMessagePresent("The category is changed.")
                 .openTestPage(TestEnum.WS)
-                .openCategoryPage(CATEGORY_NAME + 1, testOCEJWSD.getName(), CATEGORY_PATHNAME + 1);
+                .openCategoryPage(testOCEJWSD.getName(), CATEGORY_PATHNAME + 1);
     }
 
     private void addRemoveCategoryToTest() {
         adminPage.openAdminTab()
-                .openShowTestPage(testOCJP.getPathName())
+                .openShowTestPage(ocpjp8.getPathName())
                 .openAddCategoryPage()
                 .selectTest(testOCEJWSD.getPathName())
                 .selectCategory(CATEGORY_PATHNAME + 1)
@@ -79,12 +79,12 @@ public class CategoryTest extends BaseTest {
                 .loadMessagePage()
                 .isMessagePresent("The category is added.")
                 .openAdminTab()
-                .openShowTestPage(testOCJP.getPathName())
+                .openShowTestPage(ocpjp8.getPathName())
                 .validateCategoryPresent(CATEGORY_PATHNAME + 1)
-                .clickRemoveFromTest(CATEGORY_PATHNAME + 1, testOCJP.getPathName())
+                .clickRemoveFromTest(CATEGORY_PATHNAME + 1, ocpjp8.getPathName())
                 .isMessagePresent("The category is removed from the selected test.")
                 .openAdminTab()
-                .openShowTestPage(testOCJP.getPathName())
+                .openShowTestPage(ocpjp8.getPathName())
                 .validateCategoryNotPresent(CATEGORY_PATHNAME + 1)
                 .openAdminTab()
                 .openShowTestPage(testOCEJWSD.getPathName())
