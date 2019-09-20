@@ -15,17 +15,17 @@ public class Category {
     public Category() {
     }
 
-    public Category(String name, String pathName, Test test) {
+    public Category(String name, String pathName, Test test, String description) {
         this.name = name;
         this.pathName = pathName;
         this.test = test;
+        this.description = description;
     }
 
-    public Category(String name, String pathName, String description, String keywords) {
+    public Category(String name, String pathName, String description) {
         this.name = name;
         this.pathName = pathName;
         this.description = description;
-        this.keywords = keywords;
     }
 
     public String getName() {

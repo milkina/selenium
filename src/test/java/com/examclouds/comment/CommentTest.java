@@ -19,7 +19,7 @@ public class CommentTest extends BaseTest {
     public static final String ARTICLE_PAGE_COMMENT = "Article Page Comment";
     private String categoryName = "Basic Concepts";
     private String categoryPathName = "basic-concepts";
-    private String testName = "OCEJWSD 6";
+    private String testName = "Web Services";
     private HomePage homePage = new HomePage(this);
 
     @Test

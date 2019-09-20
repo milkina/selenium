@@ -106,9 +106,9 @@ public class QuestionEntryTest extends BaseTest {
                     .openShowQuestionsPage(category2.getPathName(), category2.getTest().getPathName(), category2.getTitle())
                     .validateQuestionEntryNotPresent(questionEntry2)
                     .validateQuestionCount(0);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
-        }finally {
+        } finally {
             deleteCategory(category1.getTest().getPathName(), category1.getPathName(), homePage);
             deleteCategory(category2.getTest().getPathName(), category2.getPathName(), homePage);
         }
@@ -214,66 +214,63 @@ public class QuestionEntryTest extends BaseTest {
 
     @Test
     public void testMoveQuestions() {
-        try {
-            addCategory(category1.getTest().getPathName(), category1, homePage);
-            homePage.logout();
-            addCategory(category2.getTest().getPathName(), category2, homePage);
-            homePage.openAdminTab();
-            addQuestion(category1, questionEntry1);
-            addQuestion(category1, questionEntry2);
-            addQuestion(category1, questionEntry3);
-            //move questions
-            homePage.openAdminTab()
-                    .openShowTestPage(category1.getTest().getPathName())
-                    .openMoveQuestionsPage(category1.getPathName())
-                    .validateTestNamePresent(category1.getTest().getName())
-                    .validateCategoryNamePresent(category1.getName())
-                    .selectTest(category1.getTest().getPathName())
-                    .selectCategory(category1.getPathName())
-                    .setFromNumber("2")
-                    .setToNumber("2")
-                    .saveData()
-                    .validateMessagePresent("Please select different category.")
-                    .selectTest(category2.getTest().getPathName())
-                    .selectCategory(category2.getPathName())
-                    .setFromNumber("3")
-                    .setToNumber("2")
-                    .saveData()
-                    .validateMessagePresent("'From' cannot be greater than 'To' number. " +
-                            "'From' and 'To' should be less than total number of questions in the current category.")
-                    .selectTest(category2.getTest().getPathName())
-                    .selectCategory(category2.getPathName())
-                    .setFromNumber("2")
-                    .setToNumber("3")
-                    .successfulSaveData()
-                    .isMessagePresent("2 questions moved.")
-                    //Verify questions are moved
-                    .openAdminTab()
-                    .openShowTestPage(category1.getTest().getPathName())
-                    .openShowQuestionsPage(category1.getPathName(), category1.getTest().getPathName(), category1.getTitle())
-                    .validateQuestionEntryPresent(questionEntry1)
-                    .validateQuestionEntryNotPresent(questionEntry2)
-                    .validateQuestionEntryNotPresent(questionEntry3)
-                    .validateQuestionCount(1)
-                    .deleteQuestion()
-                    //Verify questions are moved
-                    .openAdminTab()
-                    .openShowTestPage(category2.getTest().getPathName())
-                    .openShowQuestionsPage(category2.getPathName(), category2.getTest().getPathName(), category2.getTitle())
-                    .validateQuestionEntryNotPresent(questionEntry1)
-                    .validateQuestionEntryPresent(questionEntry2)
-                    .validateQuestionEntryPresent(questionEntry3)
-                    .validateQuestionCount(2)
-                    //Delete questions
-                    .deleteQuestion()
-                    .openAdminTab()
-                    .openShowTestPage(category2.getTest().getPathName())
-                    .openShowQuestionsPage(category2.getPathName(), category2.getTest().getPathName(), category2.getTitle())
-                    .deleteQuestion();
-        } finally {
-            deleteCategory(category1.getTest().getPathName(), category1.getPathName(), homePage);
-            deleteCategory(category2.getTest().getPathName(), category2.getPathName(), homePage);
-        }
+        addCategory(category1.getTest().getPathName(), category1, homePage);
+        homePage.logout();
+        addCategory(category2.getTest().getPathName(), category2, homePage);
+        homePage.openAdminTab();
+        addQuestion(category1, questionEntry1);
+        addQuestion(category1, questionEntry2);
+        addQuestion(category1, questionEntry3);
+        //move questions
+        homePage.openAdminTab()
+                .openShowTestPage(category1.getTest().getPathName())
+                .openMoveQuestionsPage(category1.getPathName())
+                .validateTestNamePresent(category1.getTest().getName())
+                .validateCategoryNamePresent(category1.getName())
+                .selectTest(category1.getTest().getPathName())
+                .selectCategory(category1.getPathName())
+                .setFromNumber("2")
+                .setToNumber("2")
+                .saveData()
+                .validateMessagePresent("Please select different category.")
+                .selectTest(category2.getTest().getPathName())
+                .selectCategory(category2.getPathName())
+                .setFromNumber("3")
+                .setToNumber("2")
+                .saveData()
+                .validateMessagePresent("'From' cannot be greater than 'To' number. " +
+                        "'From' and 'To' should be less than total number of questions in the current category.")
+                .selectTest(category2.getTest().getPathName())
+                .selectCategory(category2.getPathName())
+                .setFromNumber("2")
+                .setToNumber("3")
+                .successfulSaveData()
+                .isMessagePresent("2 questions moved.")
+                //Verify questions are moved
+                .openAdminTab()
+                .openShowTestPage(category1.getTest().getPathName())
+                .openShowQuestionsPage(category1.getPathName(), category1.getTest().getPathName(), category1.getTitle())
+                .validateQuestionEntryPresent(questionEntry1)
+                .validateQuestionEntryNotPresent(questionEntry2)
+                .validateQuestionEntryNotPresent(questionEntry3)
+                .validateQuestionCount(1)
+                .deleteQuestion()
+                //Verify questions are moved
+                .openAdminTab()
+                .openShowTestPage(category2.getTest().getPathName())
+                .openShowQuestionsPage(category2.getPathName(), category2.getTest().getPathName(), category2.getTitle())
+                .validateQuestionEntryNotPresent(questionEntry1)
+                .validateQuestionEntryPresent(questionEntry2)
+                .validateQuestionEntryPresent(questionEntry3)
+                .validateQuestionCount(2)
+                //Delete questions
+                .deleteQuestion()
+                .openAdminTab()
+                .openShowTestPage(category2.getTest().getPathName())
+                .openShowQuestionsPage(category2.getPathName(), category2.getTest().getPathName(), category2.getTitle())
+                .deleteQuestion();
+        deleteCategory(category1.getTest().getPathName(), category1.getPathName(), homePage);
+        deleteCategory(category2.getTest().getPathName(), category2.getPathName(), homePage);
     }
 
     private void addQuestion(Category category, QuestionEntry questionEntry) {

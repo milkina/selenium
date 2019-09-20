@@ -13,9 +13,7 @@ public class RegisterPage extends BasePage {
     public static final String LOC_INPUT_LOGIN = "input[name$='login']";
     public static final String LOC_INPUT_PASSWORD = "input[name$='password']";
     public static final String LOC_INPUT_CONF_PASSWORD = "input[name$='confPassword']";
-    public static final String LOC_INPUT_FIRST_NAME = "input[name$='personInfo.firstName']";
-    public static final String LOC_INPUT_LAST_NAME = "input[name$='personInfo.lastName']";
-    public static final String LOC_INPUT_EMAIL = "input[name$='personInfo.email']";
+    public static final String LOC_INPUT_EMAIL = "input[name$='email']";
 
     public static final String LOC_SUBMIT_BTN = "input[name$='Confirm']";
 
@@ -26,13 +24,10 @@ public class RegisterPage extends BasePage {
     public static final String LOGIN = "someLogin";
     public static final String EXIST_LOGIN = "sad";
     public static final String PASSWORD = "somePassword";
-    public static final String FIRST_NAME = "firstName";
-    public static final String LAST_NAME = "lastName";
     public static final String EMAIL = "email@gmail.com";
 
     public RegisterPage(Locomotive baseTest) {
         super(baseTest);
-
     }
 
     @Override
@@ -55,20 +50,6 @@ public class RegisterPage extends BasePage {
         return this;
     }
 
-    public RegisterPage setFirstName(String firstName) {
-        if (firstName != null) {
-            test.setText(LOC_INPUT_FIRST_NAME, firstName);
-        }
-        return this;
-    }
-
-    public RegisterPage setLastName(String lastName) {
-        if (lastName != null) {
-            test.setText(LOC_INPUT_LAST_NAME, lastName);
-        }
-        return this;
-    }
-
     public RegisterPage setEmail(String email) {
         test.setText(LOC_INPUT_EMAIL, email);
         return this;
@@ -77,8 +58,6 @@ public class RegisterPage extends BasePage {
     public RegisterPage setPerson(Person person) {
         setLogin(person.getLogin())
                 .setPassword(person.getPassword())
-                .setFirstName(person.getFirstName())
-                .setLastName(person.getLastName())
                 .setEmail(person.getEmail());
         return this;
     }

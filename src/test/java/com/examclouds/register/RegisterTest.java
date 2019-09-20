@@ -41,11 +41,11 @@ public class RegisterTest extends BaseTest {
 
     @Test
     public void register() {
-        Person person = new Person(LOGIN, PASSWORD, FIRST_NAME, LAST_NAME, EMAIL);
+        Person person = new Person(LOGIN, PASSWORD,  EMAIL);
         homePage.openRegisterPage()
                 .register(person, PASSWORD)
                 .loadWelcomeRegisterPage()
-                .verifyWelcomeText(FIRST_NAME + " " + LAST_NAME)
+                .verifyWelcomeText(LOGIN)
                 .verifyUserLoggedIn(LOGIN)
                 .profileTabPresent()
                 .openMyProfile()

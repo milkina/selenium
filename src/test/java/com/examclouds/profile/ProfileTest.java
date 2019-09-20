@@ -16,8 +16,8 @@ public class ProfileTest extends BaseTest {
     @Test
     public void testChangeProfileData() {
         try {
-            Person person1 = new Person(USER_LOGIN + 1, USER_PASSWORD + 1, USER_FIRST_NAME + 1, USER_LAST_NAME + 1, 1 + USER_EMAIL);
-            Person person2 = new Person(USER_LOGIN, USER_PASSWORD, USER_FIRST_NAME, USER_LAST_NAME, USER_EMAIL);
+            Person person1 = new Person(USER_LOGIN + 1, USER_PASSWORD + 1, 1 + USER_EMAIL);
+            Person person2 = new Person(USER_LOGIN, USER_PASSWORD, USER_EMAIL);
             homePage.openRegisterPage()
                     .register(person2, USER_PASSWORD)
                     .openMyProfile()
@@ -29,14 +29,14 @@ public class ProfileTest extends BaseTest {
                     .verifyPersonData(person2)
                     .logout();
         } finally {
-           homePage.openLoginPage().sysadminLogin().openAdminTab().deleteUser(USER_LOGIN);
+            homePage.openLoginPage().sysadminLogin().openAdminTab().deleteUser(USER_LOGIN);
         }
     }
 
     @Test
     public void testChangePassword() {
         try {
-            Person person = new Person(USER_LOGIN, USER_PASSWORD, USER_FIRST_NAME, USER_LAST_NAME, USER_EMAIL);
+            Person person = new Person(USER_LOGIN, USER_PASSWORD, USER_EMAIL);
             homePage.openRegisterPage()
                     .register(person, USER_PASSWORD)
                     .loadWelcomeRegisterPage()
@@ -67,39 +67,36 @@ public class ProfileTest extends BaseTest {
 
     @Test
     public void testAddQuestion() {
-        try {
-            Person person = new Person(USER_LOGIN, USER_PASSWORD, USER_FIRST_NAME, USER_LAST_NAME, USER_EMAIL);
-            addCategory(category1.getTest().getPathName(), category1, homePage);
-            homePage.logout();
-            homePage.openRegisterPage()
-                    .register(person, USER_PASSWORD)
-                    .openMyProfile()
-                    .addQuestion()
-                    .selectTest(category1.getTest().getPathName())
-                    .selectCategory(category1.getPathName())
-                    .addQuestion(questionEntry1)
-                    .openMyProfile()
-                    .clickMyQuestions()
-                    .validateQuestionEntryPresent(questionEntry1)
-                    .validateQuestionNotApproved()
-                    .showQuestionPicture(category1)
-                    .openMyProfile()
-                    .clickMyQuestions()
-                    .goToQuestion(category1)
-                    .openMyProfile()
-                    .clickMyQuestions()
-                    .openEditQuestionPage()
-                    .editQuestion(questionEntry1)
-                    .isMessagePresent("The question is updated.");
-        } finally {
-            homePage.openMyProfile()
-                    .clickMyQuestions()
-                    .deleteQuestion()
-                    .openMyProfile()
-                    .clickMyQuestions()
-                    .validateQuestionEntryNotPresent(questionEntry1).logout();
-            homePage.openLoginPage().sysadminLogin().openAdminTab().deleteUser(USER_LOGIN);
-            deleteCategory(category1.getTest().getPathName(), category1.getPathName(), homePage);
-        }
+        Person person = new Person(USER_LOGIN, USER_PASSWORD, USER_EMAIL);
+        addCategory(category1.getTest().getPathName(), category1, homePage);
+        homePage.logout();
+        homePage.openRegisterPage()
+                .register(person, USER_PASSWORD)
+                .openMyProfile()
+                .addQuestion()
+                .selectTest(category1.getTest().getPathName())
+                .selectCategory(category1.getPathName())
+                .addQuestion(questionEntry1)
+                .openMyProfile()
+                .clickMyQuestions()
+                .validateQuestionEntryPresent(questionEntry1)
+                .validateQuestionNotApproved()
+                .showQuestionPicture(category1)
+                .openMyProfile()
+                .clickMyQuestions()
+                .goToQuestion(category1)
+                .openMyProfile()
+                .clickMyQuestions()
+                .openEditQuestionPage()
+                .editQuestion(questionEntry1)
+                .isMessagePresent("The question is updated.");
+        homePage.openMyProfile()
+                .clickMyQuestions()
+                .deleteQuestion()
+                .openMyProfile()
+                .clickMyQuestions()
+                .validateQuestionEntryNotPresent(questionEntry1).logout();
+        homePage.openLoginPage().sysadminLogin().openAdminTab().deleteUser(USER_LOGIN);
+        deleteCategory(category1.getTest().getPathName(), category1.getPathName(), homePage);
     }
 }

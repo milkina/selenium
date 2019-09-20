@@ -10,7 +10,7 @@ import io.ddavison.conductor.Locomotive;
 public class TestPage extends BasePage {
     public static final String LOC_CATEGORY_MENU_DIV = "div[id$='categoryMenuDiv']";
     public static final String LOC_COMMENT_DIV = "div[id$='commentDiv']";
-    public static final String LOC_CATEGORY_MENU_ITEM = "div[id$='categories'] div p a[id='categoryItem%s']";
+    public static final String LOC_CATEGORY_MENU_ITEM = "a[id='categoryItem%s']";
     private String title;
 
     public TestPage(Locomotive baseTest, String title) {

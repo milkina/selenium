@@ -113,7 +113,7 @@ public class WelcomeAdminPage extends BasePage {
 
     public WelcomeAdminPage validateTestOrder(String testPath1, String testPath2) {
         WebElement element = test.driver.findElement(
-                By.cssSelector(String.format("#%s + tr",
+                By.cssSelector(String.format("#%s",
                         testPath1)));
         assertEquals(element.getAttribute("id"), testPath2);
         return this;

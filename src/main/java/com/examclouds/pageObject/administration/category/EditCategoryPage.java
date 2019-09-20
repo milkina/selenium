@@ -65,7 +65,6 @@ public class EditCategoryPage extends CategoryPage {
         validateCategoryName(category.getName());
         validateCategoryPathName(category.getPathName());
         validateCategoryImage(category.getImage());
-        validateCategoryKeywords(category.getKeywords());
         validateCategoryDescription(category.getDescription());
         validateCategoryText(category.getText());
         validateIndex();

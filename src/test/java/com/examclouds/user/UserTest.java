@@ -14,7 +14,7 @@ public class UserTest extends BaseTest {
 
     @Test
     public void testDeleteUserWithAddedQuestions() {
-        Person person = new Person(USER_LOGIN, USER_PASSWORD, USER_FIRST_NAME, USER_LAST_NAME, USER_EMAIL);
+        Person person = new Person(USER_LOGIN, USER_PASSWORD, USER_EMAIL);
 
         try {
             homePage.openRegisterPage()
@@ -37,7 +37,7 @@ public class UserTest extends BaseTest {
 
     @Test
     public void testApproveQuestion() {
-        Person person = new Person(USER_LOGIN, USER_PASSWORD, USER_FIRST_NAME, USER_LAST_NAME, USER_EMAIL);
+        Person person = new Person(USER_LOGIN, USER_PASSWORD, USER_EMAIL);
         addCategory(category1.getTest().getPathName(), category1, homePage);
 
         try {

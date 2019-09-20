@@ -40,7 +40,7 @@ abstract public class BasePage {
     public static final String LOC_PERSON_LOGIN = "a[id$='userLogin']";
 
     public static final String LOC_COMMENT_TEXTAREA = "textarea[name='commentText']";
-    public static final String LOC_COMMENT_BTN = "input[name='addComment']";
+    public static final String LOC_COMMENT_BTN = "a[id='addComment']";
     public static final String LOC_COMMENT_DIV = "div[class$='commentBody']";
     public static final String LOC_EDIT_COMMENT_HREF = "div[class$='commentBody'] div a[id$='Edit%s']";
     public static final String LOC_DELETE_COMMENT_HREF = "div[class$='commentBody'] input[type$='checkbox'][value$='%s']";
@@ -60,10 +60,7 @@ abstract public class BasePage {
 
     public static final String USER_LOGIN = "тестUser";
     public static final String USER_PASSWORD = "тестPassword";
-    public static final String USER_FIRST_NAME = "тестFirstName";
-    public static final String USER_LAST_NAME = "тестLastName";
     public static final String USER_EMAIL = "testEmail@gmail.com";
-
 
     public BasePage(Locomotive baseTest) {
         test = baseTest;

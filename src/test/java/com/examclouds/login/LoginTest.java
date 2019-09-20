@@ -14,6 +14,7 @@ import static com.examclouds.pageObject.base.BasePage.USER_PASSWORD;
  */
 public class LoginTest extends BaseTest {
     HomePage homePage = new HomePage(this);
+
     @Test
     public void testMenu() {
         super.testMenuWithoutLogin(homePage);
@@ -30,14 +31,14 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
-    public void testMenuWithWrongUserPassword(){
+    public void testMenuWithWrongUserPassword() {
         testMenuWithWrongUserPassword(homePage);
     }
 
     @Test
-    public void testMenuAfterUserLogin(){
+    public void testMenuAfterUserLogin() {
         try {
-            Person person = new Person(USER_LOGIN, USER_PASSWORD, USER_FIRST_NAME, USER_LAST_NAME, USER_EMAIL);
+            Person person = new Person(USER_LOGIN, USER_PASSWORD, USER_EMAIL);
             homePage.openRegisterPage()
                     .register(person, USER_PASSWORD)
                     .loadWelcomeRegisterPage().logout();

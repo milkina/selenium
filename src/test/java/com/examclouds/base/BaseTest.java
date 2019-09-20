@@ -21,13 +21,13 @@ public class BaseTest extends Locomotive {
     protected Article article2 = new Article("article2Key", "article2Desc", "article2Title", "article2Text", "article2Img");
     protected Test test1 = new Test("test1", "TEST1Тест1", "#test1#тест1", "itemText1", article1, "ru");
     protected Test test2 = new Test("test2", "TEST2", "#test2", "itemText2", article2, "ru");
-    protected Test testOCEJWSD = new Test("web-services", "OCEJWSD 6");
-    protected Category category1 = new Category("Category1", "category1", testOCEJWSD);
+    protected Test testOCEJWSD = new Test("web-services", "Web Services");
+    protected Category category1 = new Category("Category1", "category1", testOCEJWSD, "categoryDescription");
 
     protected Test ocpjp8 = new Test("ocpjp8", "OCPJP 8");
-    protected Test testJPA = new Test("jpa", "OCEJPAD 6");
-    protected Category category2 = new Category("Category2", "category2", ocpjp8);
-    protected Category category3 = new Category("Category3", "category3", testJPA);
+    protected Test testJPA = new Test("jpa", "Java Persistence API");
+    protected Category category2 = new Category("Category2", "category2", ocpjp8, "categoryDescription");
+    protected Category category3 = new Category("Category3", "category3", testJPA, "categoryDescription");
     protected QuestionEntry questionEntry1 = new QuestionEntry("question2", "answer2");
     protected static TestQuestionEntry[] testQuestionEntries = new TestQuestionEntry[3];
     protected static TestQuestionEntry testQuestionEntry;

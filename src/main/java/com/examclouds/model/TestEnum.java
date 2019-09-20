@@ -4,7 +4,7 @@ package com.examclouds.model;
  * Created by Tatyana on 29.05.2016.
  */
 public enum TestEnum {
-    OCJP("ocjp", "OCJP 6"), JPA("jpa", "OCEJPAD 6"), WS("web-services", "OCEJWSD 6");
+    OCJP("ocjp", "OCJP 6"), JPA("jpa", "OCEJPAD 6"), WS("web-services", "Web Services");
     private String name;
     private String title;
 
@@ -22,6 +22,6 @@ public enum TestEnum {
     }
 
     public String getTitleName() {
-        return String.format("Free %s Certification Tutorial on ExamClouds", title);
+        return String.format("Free %s Tutorial on ExamClouds", title);
     }
 }

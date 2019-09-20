@@ -19,8 +19,6 @@ public class MyProfilePage extends BasePage {
     public static final String TITLE = "My Profile on ExamClouds";
 
     public static final String LOC_INPUT_LOGIN = "input[name$='login']";
-    public static final String LOC_INPUT_FIRST_NAME = "input[name$='firstName']";
-    public static final String LOC_INPUT_LAST_NAME = "input[name$='lastName']";
     public static final String LOC_INPUT_EMAIL = "input[name$='email']";
     public static final By LOC_SAVE_BTN = By.xpath("//input[@name='Save']");
     public static final String LOC_CHANGE_PSWD_BTN = "input[name$='ChangePassword']";
@@ -38,16 +36,12 @@ public class MyProfilePage extends BasePage {
 
     public MyProfilePage verifyPersonData(Person person) {
         test.validateText(LOC_INPUT_LOGIN, person.getLogin())
-                .validateText(LOC_INPUT_FIRST_NAME, person.getFirstName())
-                .validateText(LOC_INPUT_LAST_NAME, person.getLastName())
                 .validateText(LOC_INPUT_EMAIL, person.getEmail());
         return this;
     }
 
     public MyProfilePage setPersonData(Person person) {
         test.setText(LOC_INPUT_LOGIN, person.getLogin())
-                .setText(LOC_INPUT_FIRST_NAME, person.getFirstName())
-                .setText(LOC_INPUT_LAST_NAME, person.getLastName())
                 .setText(LOC_INPUT_EMAIL, person.getEmail());
         return this;
     }

@@ -5,7 +5,7 @@ import io.ddavison.conductor.Locomotive;
 import org.openqa.selenium.By;
 
 public class StartQuestionTestPage extends BasePage {
-    public static final By LOC_START_QUIZ_BTN = By.xpath("//input[@id='startQuiz']");
+    public static final By LOC_START_QUIZ_BTN = By.xpath("//a[@id='startQuiz']");
     public static final String LOC_SELECT_OPTIONS_DIV = "div[id$='selectOptionsPanel']";
     public static final String LOC_EXAM_OPTION = "input[value='%s']";
     private String title;

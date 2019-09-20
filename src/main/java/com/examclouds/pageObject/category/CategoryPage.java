@@ -12,7 +12,7 @@ import org.openqa.selenium.By;
  * Created by Tatyana on 29.05.2016.
  */
 public class CategoryPage extends TestPage {
-    public static final By LOC_START_QUIZ_BTN = By.xpath("//input[@id='startQuiz']");
+    public static final By LOC_START_QUIZ_BTN = By.xpath("//a[@id='startQuiz']");
     public static final By LOC_START_TEST_BTN = By.xpath("//input[@id='startTest']");
 
     public static final String CATEGORY_TITLE = "Basic Concepts - Web Services";
@@ -36,9 +36,9 @@ public class CategoryPage extends TestPage {
         return this;
     }
 
-    public StartQuestionTestPage clickStartQuizButton() {
+    public ShowExamQuestionPage clickStartQuizButton() {
         test.click(LOC_START_QUIZ_BTN);
-        return new StartQuestionTestPage(test, title);
+        return new ShowExamQuestionPage(test, title);
     }
 
     public ShowTestExamQuestionPage clickStartTestButton() {

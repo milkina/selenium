@@ -21,7 +21,7 @@ public class CategoryTest extends BaseTest {
 
     @Test
     public void addEditDeleteCategory() {
-        Category category = new Category(CATEGORY_NAME, CATEGORY_PATHNAME, CATEGORY_DESCRIPTION, CATEGORY_KEYWORDS);
+        Category category = new Category(CATEGORY_NAME, CATEGORY_PATHNAME, CATEGORY_DESCRIPTION);
         category.setImage(CATEGORY_IMAGE);
         category.setText(CATEGORY_TEXT);
 
